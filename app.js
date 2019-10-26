@@ -33,7 +33,12 @@ app.engine(
     extname: "hbs",
     defaultLayout: "layout",
     layoutsDir: __dirname + "/views/",
-    partialsDir: __dirname + "/views/partials/"
+    partialsDir: __dirname + "/views/partials/",
+    helpers:{
+      if_eq :  (a, b)=>  {
+        return (a===b)
+      }
+    }
   })
 );
 
