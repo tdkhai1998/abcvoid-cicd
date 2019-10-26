@@ -171,4 +171,38 @@ button.btn_2.banner_btn_2.backBtn > a > span{
   width: 30%;
 }
 
+/* user info page */
+h2[class = 'userInfo']{
+  font-size: 50px !important;
+}
 
+.userInfo .breadcrumb_iner_item{
+  /* float: right !important; */
+  text-align: center !important;
+}
+
+.userInfo .breadcrumb_iner.text-center{
+  height: 500px !important;
+  padding-left: 25%;
+  padding-right: 25%;
+  margin-top: 100px;
+}
+
+.saveInfo {
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-align: center;
+  width: 40%;
+  height: 50px;
+  padding: 5px;
+}
+
+.userInfo div[class = "formElement"]{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.userInfo .single-input{
+  border-radius: 20px;
+}

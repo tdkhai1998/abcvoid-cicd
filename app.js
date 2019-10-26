@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var userInfoRouter = require("./routes/userInfo");
 var loginRouter = require("./routes/login");
 var recoverPassword = require("./routes/recoverPassword")
 var registerRouter = require("./routes/register");
@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("./routes/genarateKey"));
 //routes
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/userInfo", userInfoRouter);
 app.use("/login", loginRouter);
 app.use("/forgotPassword", passwordForgot);
 app.use("/logout", require("./routes/logout"));

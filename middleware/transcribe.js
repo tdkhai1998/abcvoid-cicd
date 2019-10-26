@@ -45,6 +45,7 @@ exports.index = async (req, res, next) => {
   res.render("transcribe/transcribe", {
     title: "Phiên dịch",
     jsonData: jsonData,
-    descriptionFile: descriptionFile
+    descriptionFile: descriptionFile,
+    user: req.user,
   });
 };
