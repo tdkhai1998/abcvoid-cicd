@@ -1,0 +1,174 @@
+.group-social-button {
+  width: 100%;
+  display: inline-flex;
+  /* margin: 10px; */
+  /* margin-top: 10px; */
+}
+
+.main_menu .main-menu-item.main-menu-item-user ul li .nav-link {
+  text-transform: none !important;
+}
+
+.main-menu-item.main-menu-item-user .dropdown-menu {
+  right: 0 !important;
+  left: unset !important;
+}
+
+.banner_part .banner_text .banner_text_iner {
+  padding-top: 150px;
+  vertical-align: unset;
+}
+
+.signupform {
+  margin-top: 160px;
+  width: 40px;
+}
+
+.banner_part.login-section  .single-input,
+.banner_part.register-section  .single-input {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 80%;
+  border-radius: 20px;
+  border-style: none;
+}
+
+.signupBtn {
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-align: center;
+  width: 40%;
+  height: 50px;
+  padding: 5px;
+}
+
+.banner_part.login-section,
+.banner_part.register-section {
+  height: 810px;
+}
+
+.banner_part.login-section .landing, .banner_part.register-section .landing {
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 20px;
+  width: 40%;
+}
+
+.banner_part.login-section .inputform, .banner_part.register-section .inputform {
+  border: 1px solid whitesmoke;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.logo {
+  width: 150px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+@media (max-width: 576px) {
+  .logo {
+    max-width: 100px;
+    padding: 2px;
+  }
+}
+
+.signUp-direct{
+    margin-top: 20px;
+    text-align: center
+}
+
+.mt-10{
+  text-align: center;
+}
+
+.mt-30{
+    margin-top: 30px;
+    text-align: center;
+    color: #8a8787b7;
+}
+.input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  display: inline-block;
+  padding: 18.5px 33px;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #1a1a1a;
+  transition: all .4s ease-in-out;
+  text-transform: capitalize;
+  border: 1px solid #8f9091;
+  background-size: 200% auto;
+  color: #fff;
+    border: 1px solid #fff;
+    background-color: transparent;
+}
+
+/* forgot password page */
+.img-lock{
+  content:url("../img/lock-forgotpassword.png");
+  height: 30%;
+  width: 30%;
+}
+
+.banner_img.d-none.d-lg-block{
+  text-align: center;
+  padding: 10px;
+}
+
+.banner_img.d-none.d-lg-block.forgotPasswordArea{
+  border: 1px solid whitesmoke;
+  border-radius: 20px;
+}
+
+.forgotPasswordArea>.inputform{
+  border: 0px !important;
+  padding: 10px !important;
+}
+
+.backBtn{
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-align: center;
+  width: 40%;
+  height: 50px;
+  padding: 0.001px;
+}
+
+button.btn_2.banner_btn_2.backBtn > a{
+  display: table; 
+  width:100%; 
+  height: 100%;
+  border-radius: 20px;
+}
+
+button.btn_2.banner_btn_2.backBtn > a > span{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.forgotPasswordArea .group-social-button {
+  margin-top: 20px !important;
+}
+
+/* verified password page */
+.img-verified{
+  content:url("../img/verified_icon.png");
+  height: 30%;
+  width: 30%;
+}
+
+/* change new password page */
+.img-smile{
+  content:url("../img/smile_icon.png");
+  height: 30%;
+  width: 30%;
+}
+
+
