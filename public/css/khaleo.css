@@ -171,4 +171,16 @@ button.btn_2.banner_btn_2.backBtn > a > span{
   width: 30%;
 }
 
+/* user info page */
+h2[class = 'userInfo']{
+  font-size: 50px !important;
+}
 
+.userInfo .breadcrumb_iner_item{
+  float: left !important;
+  margin-top: 120px;
+}
+
+.userInfo .breadcrumb_iner.text-center{
+  height: 300px !important;
+}
