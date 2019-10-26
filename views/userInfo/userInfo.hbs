@@ -9,6 +9,22 @@
                 <div class="breadcrumb_iner text-center">
                     <div class="breadcrumb_iner_item">
                         <h2 class="userInfo">User Information</h2>
+                        <form>
+                            <div class="formElement">
+                                <label style="float: left;" for="username">Your email</label>
+                                <input style="background-color: cadetblue;" id="username" value="{{user.email}}" readonly type="text" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required class="single-input">
+                            </div>
+                            <div class="formElement">
+                                <label style="float: left;" for="username">Your name</label>
+                                <input id="username" name="name" value="{{user.name}}" type="text" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required class="single-input">
+                            </div>
+                            <div class="formElement">
+                                <button type="submit" class="btn_2 banner_btn_2 saveInfo" placeholder="Save" value="">Save</button>
+                            </div>
+                            <div class="formElement">
+                                <button class="btn_2 banner_btn_2 saveInfo" placeholder="Change password" value="">Change password</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

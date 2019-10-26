@@ -177,10 +177,32 @@ h2[class = 'userInfo']{
 }
 
 .userInfo .breadcrumb_iner_item{
-  float: left !important;
-  margin-top: 120px;
+  /* float: right !important; */
+  text-align: center !important;
 }
 
 .userInfo .breadcrumb_iner.text-center{
-  height: 300px !important;
+  height: 500px !important;
+  padding-left: 25%;
+  padding-right: 25%;
+  margin-top: 100px;
+}
+
+.saveInfo {
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-align: center;
+  width: 40%;
+  height: 50px;
+  padding: 5px;
+}
+
+.userInfo div[class = "formElement"]{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.userInfo .single-input{
+  border-radius: 20px;
 }
