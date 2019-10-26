@@ -39,5 +39,9 @@
     "request": "^2.88.0",
     "utf8": "^3.0.0",
     "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3"
   }
 }
