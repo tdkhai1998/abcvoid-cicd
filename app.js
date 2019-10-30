@@ -18,6 +18,7 @@ var transcribeRouter = require("./routes/transcribe");
 var getAudioApiRouter = require("./routes/api/jsonAudio");
 var apiDocument = require("./routes/apidocument");
 var price = require("./routes/price");
+const paymentRouter = require("./routes/payment/payment");
 var app = express();
 
 //
@@ -62,7 +63,8 @@ app.use("/getkey", getAudioApiRouter);
 app.use("/verify",verifyEmail);
 app.use("/apidoc", apiDocument);
 app.use("/price", price);
-app.use("/recoverPassword",recoverPassword)
+app.use("/recoverPassword",recoverPassword);
+app.use('/payment',paymentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

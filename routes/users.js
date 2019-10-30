@@ -3,6 +3,9 @@ var router = express.Router();
 const userModel = require("../model/user.model");
 const toFunction = require("../util/toFunction").default;
 /* GET users listing. */
+router.get("/", function(req, res, next) {
+  res.send("respond with a resource");
+});
 router.get("/profile", async (req, res, next) => {
   const user = req.user;
   const infoUser = await toFunction(userModel.findApiKeys(user.id));
@@ -22,8 +25,5 @@ router.post("/profile", async (req, res, next) => {
     userModel.update(user);
   }
   res.redirect("/user/profile");
-});
-router.get('/', function(req, res, next) {
-  res.render('userInfo/userInfo', {title: "user info", user: req.user});
 });
 module.exports = router;

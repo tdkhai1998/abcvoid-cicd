@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const keyModel = require("../../model/key.model");
-const toFunc = require("../../util/toFunction")
+const toFunc = require("../../util/toFunction");
 
 const getInfoApiKey = async (req, res,next) => {
     const id = req.params.id;
     const key = await toFunc(keyModel.singleById(id));
+
     if(key[0]){
        return  {error: key[0]}
     }   
-    const data=key[1];
+    const data=key[1][0];
     const path =  `/img/${data.price}.png`;
     return {error: null,data,path};
 }
@@ -23,7 +24,8 @@ router.get('/:id',async (req, res,next) => {
 });
 router.post('/:id',async (req,res,next) => {
     const transactionId= req.body.transactionId||"";
-    const  {data, path,error} = getInfoApiKey(req, res,next);
+    const  {data, path,error} = await getInfoApiKey(req, res,next);
+    console.log("dataa----",error, data)
     if(error) return next(result.error);
     if(data.transactionId === transactionId) 
     {
