@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var packageKeyModel = require('../model/packageKey.model');
-var toFunc = require('../util/toFunction');
+var toFunc = require('../util/toFunction').default;
 
 /* GET home page. */
 router.get("/", async function(req, res, next) {

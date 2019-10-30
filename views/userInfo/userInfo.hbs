@@ -21,9 +21,11 @@
                             <div class="formElement">
                                 <button type="submit" class="btn_2 banner_btn_2 saveInfo" placeholder="Save" value="">Save</button>
                             </div>
-                            <div class="formElement">
-                                <button class="btn_2 banner_btn_2 saveInfo" placeholder="Change password" value="">Change password</button>
-                            </div>
+                            {{#if (if_eq user.role "user")}}
+                                <div class="formElement">
+                                    <button class="btn_2 banner_btn_2 saveInfo" placeholder="Change password" value="">Change password</button>
+                                </div>
+                            {{/if}}
                         </form>
                     </div>
                 </div>
