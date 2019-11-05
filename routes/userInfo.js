@@ -1,29 +1,30 @@
 var express = require("express");
 var router = express.Router();
 const userModel = require("../model/user.model");
-const toFunction = require("../util/toFunction").default;
+const toFunction = require("../util/toFunction");
 /* GET users listing. */
-router.get("/profile", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   const user = req.user;
+  console.log(user);
   const infoUser = await toFunction(userModel.findApiKeys(user.id));
   if (infoUser[0]) {
     return next(infoUser[0]);
   }
-  res.render("/profile", {
+  res.render("userInfo/userInfo", {
     user,
     packages: infoUser[1]
   });
 });
-router.post("/profile", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const user = req.user;
   const name = req.body.name;
   if (name) {
     user.name = name;
     userModel.update(user);
   }
-  res.redirect("/user/profile");
+  res.redirect("/profile");
 });
-router.get('/', function(req, res, next) {
-  res.render('userInfo/userInfo', {title: "user info", user: req.user});
-});
+// router.get('/', function(req, res, next) {
+//   res.render('userInfo/userInfo', {title: "user info", user: req.user});
+// });
 module.exports = router;

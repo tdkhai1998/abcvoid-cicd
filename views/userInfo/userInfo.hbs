@@ -9,7 +9,7 @@
                 <div class="breadcrumb_iner text-center">
                     <div class="breadcrumb_iner_item">
                         <h2 class="userInfo">User Information</h2>
-                        <form>
+                        <form method="POST">
                             <div class="formElement">
                                 <label style="float: left;" for="username">Your email</label>
                                 <input style="background-color: antiquewhite;" id="username" value="{{user.email}}"
@@ -28,8 +28,8 @@
                             </div>
                             {{#if (if_eq user.role "user")}}
                             <div class="formElement">
-                                <button class="btn_2 banner_btn_2 saveInfo" placeholder="Change password"
-                                    value="">Change password</button>
+                                <a href="/recoverPassword" class="btn_2 banner_btn_2 saveInfo"
+                                    placeholder="Change password" value="">Change password</a>
                             </div>
                             {{/if}}
                         </form>
