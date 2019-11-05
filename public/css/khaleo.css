@@ -24,8 +24,8 @@
   width: 40px;
 }
 
-.banner_part.login-section  .single-input,
-.banner_part.register-section  .single-input {
+.banner_part.login-section .single-input,
+.banner_part.register-section .single-input {
   margin: 0 auto;
   margin-bottom: 10px;
   width: 80%;
@@ -48,14 +48,16 @@
   height: 810px;
 }
 
-.banner_part.login-section .landing, .banner_part.register-section .landing {
+.banner_part.login-section .landing,
+.banner_part.register-section .landing {
   background-color: whitesmoke;
   padding: 10px;
   border-radius: 20px;
   width: 40%;
 }
 
-.banner_part.login-section .inputform, .banner_part.register-section .inputform {
+.banner_part.login-section,
+.banner_part.register-section {
   border: 1px solid whitesmoke;
   padding: 20px;
   border-radius: 20px;
@@ -74,19 +76,19 @@
   }
 }
 
-.signUp-direct{
-    margin-top: 20px;
-    text-align: center
-}
-
-.mt-10{
+.signUp-direct {
+  margin-top: 20px;
   text-align: center;
 }
 
-.mt-30{
-    margin-top: 30px;
-    text-align: center;
-    color: #8a8787b7;
+.mt-10 {
+  text-align: center;
+}
+
+.mt-30 {
+  margin-top: 30px;
+  text-align: center;
+  color: #8a8787b7;
 }
 .input[type="file"] {
   display: none;
@@ -100,38 +102,38 @@
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: #1a1a1a;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
   text-transform: capitalize;
   border: 1px solid #8f9091;
   background-size: 200% auto;
   color: #fff;
-    border: 1px solid #fff;
-    background-color: transparent;
+  border: 1px solid #fff;
+  background-color: transparent;
 }
 
 /* forgot password page */
-.img-lock{
-  content:url("../img/lock-forgotpassword.png");
+.img-lock {
+  content: url("../img/lock-forgotpassword.png");
   height: 30%;
   width: 30%;
 }
 
-.banner_img.d-none.d-lg-block{
+.banner_img.d-none.d-lg-block {
   text-align: center;
   padding: 10px;
 }
 
-.banner_img.d-none.d-lg-block.forgotPasswordArea{
+.banner_img.d-none.d-lg-block.forgotPasswordArea {
   border: 1px solid whitesmoke;
   border-radius: 20px;
 }
 
-.forgotPasswordArea>.inputform{
+.forgotPasswordArea > .inputform {
   border: 0px !important;
   padding: 10px !important;
 }
 
-.backBtn{
+.backBtn {
   display: block;
   margin: 0 auto;
   border-radius: 20px;
@@ -141,14 +143,14 @@
   padding: 0.001px;
 }
 
-button.btn_2.banner_btn_2.backBtn > a{
-  display: table; 
-  width:100%; 
+button.btn_2.banner_btn_2.backBtn > a {
+  display: table;
+  width: 100%;
   height: 100%;
   border-radius: 20px;
 }
 
-button.btn_2.banner_btn_2.backBtn > a > span{
+button.btn_2.banner_btn_2.backBtn > a > span {
   display: table-cell;
   vertical-align: middle;
 }
@@ -158,30 +160,30 @@ button.btn_2.banner_btn_2.backBtn > a > span{
 }
 
 /* verified password page */
-.img-verified{
-  content:url("../img/verified_icon.png");
+.img-verified {
+  content: url("../img/verified_icon.png");
   height: 30%;
   width: 30%;
 }
 
 /* change new password page */
-.img-smile{
-  content:url("../img/smile_icon.png");
+.img-smile {
+  content: url("../img/smile_icon.png");
   height: 30%;
   width: 30%;
 }
 
 /* user info page */
-h2[class = 'userInfo']{
+h2[class="userInfo"] {
   font-size: 50px !important;
 }
 
-.userInfo .breadcrumb_iner_item{
+.userInfo .breadcrumb_iner_item {
   /* float: right !important; */
   text-align: center !important;
 }
 
-.userInfo .breadcrumb_iner.text-center{
+.userInfo .breadcrumb_iner.text-center {
   height: 500px !important;
   padding-left: 25%;
   padding-right: 25%;
@@ -198,11 +200,11 @@ h2[class = 'userInfo']{
   padding: 5px;
 }
 
-.userInfo div[class = "formElement"]{
+.userInfo div[class="formElement"] {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.userInfo .single-input{
+.userInfo .single-input {
   border-radius: 20px;
 }

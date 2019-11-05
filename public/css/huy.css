@@ -1,0 +1,13 @@
+.banner_part {
+  height: 810px;
+}
+.imgIndex {
+  height: 800px;
+}
+.inputform {
+  border: none !important;
+  background-color: RGB(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+}

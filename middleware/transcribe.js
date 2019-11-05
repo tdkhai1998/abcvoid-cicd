@@ -1,8 +1,10 @@
 var request = require("request");
-var keyModel = require('../model/key.model');
+var keyModel = require("../model/key.model");
 exports.uploadSingleFile = async (req, res, next) => {
+  console.log("dcfvgbhnnhhhhhhhhhhhh");
   let wdRes = res;
   let wdReq = req;
+
   const url = "https://server-sound-api.herokuapp.com";
   let jsonData = "";
   const file = req.file;
@@ -26,19 +28,18 @@ exports.uploadSingleFile = async (req, res, next) => {
     if (err) {
       return console.error("upload failed:", err);
     } else {
-      jsonData = JSON.parse(body); 
+      jsonData = JSON.parse(body);
       console.log("Upload successful!  Server responded with:", jsonData);
       wdReq.session.filename = file.originalname;
-      wdReq.session.jsonData =  jsonData["text"];
+      wdReq.session.jsonData = jsonData["text"];
       wdRes.redirect("/transcribe");
     }
   });
 };
 exports.index = async (req, res, next) => {
-  let jsonData = '';
-  let descriptionFile = ''
-  if(req.session.filename)
-  {
+  let jsonData = "";
+  let descriptionFile = "";
+  if (req.session.filename) {
     jsonData = req.session.jsonData;
     descriptionFile = req.session.filename;
   }
@@ -46,6 +47,6 @@ exports.index = async (req, res, next) => {
     title: "Phiên dịch",
     jsonData: jsonData,
     descriptionFile: descriptionFile,
-    user: req.user,
+    user: req.user
   });
 };
