@@ -15,30 +15,31 @@
                 </div>
             </div>
             <div class="col-lg-5 signupform">
+
                 <div class="banner_img d-none d-lg-block">
                     <form class="inputform" method="POST" action="/register">
+                        <img class="logo" src="/img/logo.png" alt="logo">
                         <div class="mt-10">
                             <input type="email" placeholder="Your email" name="email" onfocus="this.placeholder = ''"
                                 onblur="this.placeholder = 'Your email'" required class="single-input">
                         </div>
                         <div class="mt-10">
                             <input type="password" name="password" id="password" placeholder="Password"
-                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required minlength="6"
-                                class="single-input">
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required
+                                minlength="6" class="single-input">
                         </div>
                         <div class="mt-10">
                             <input type="password" name="confirm_password" id="confirm_password"
                                 placeholder="Confirm Password'" onfocus="this.placeholder = ''"
-                                onblur="this.placeholder = 'Confirm Password'"
-                                onkeyup="checkPass()" required class="single-input">
+                                onblur="this.placeholder = 'Confirm Password'" onkeyup="checkPass()" required
+                                class="single-input">
                         </div>
                         <button class="btn_2 banner_btn_2 signupBtn" type="submit" placeholder="Sign up" value="Sign up"
-                            id="submitButton"
-                            >Sign
+                            id="submitButton">Sign
                             up</button>
 
                         <div class="mt-30">
-                            <label>Or sign up with</label>
+                            <label style="color: white;">Or sign up with</label>
                             <div class="group-social-button">
                                 <a href="./login/auth/google" class="btn_2 banner_btn_2 signupBtn" placeholder="Google"
                                     value="Google">
@@ -63,10 +64,10 @@
     function checkPass() {
         var pass1 = document.getElementById('password');
         var pass2 = document.getElementById('confirm_password');
-        if (pass1.value != pass2.value){
+        if (pass1.value != pass2.value) {
             pass2.setCustomValidity("Confirm password did't match.");
         }
-        else{
+        else {
             pass2.setCustomValidity("");
         }
     }

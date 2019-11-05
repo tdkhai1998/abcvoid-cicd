@@ -24,21 +24,23 @@
             <div class="col-lg-6">
                 <div class="section_tittle text-center">
                     <h2>Simple Pricing</h2>
-                    <p>Life firmament under them evening make after called dont
-                        saying likeness isn't wherein also forth she'd air two without</p>
+
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             {{#each  listKey}}
-                <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="col-lg-4 col-sm-6 mb-4">
                 <div class="single_pricing_part">
-                    <img src="img/icon/feature_icon_1.png" alt="">
+                    <img src="img/icon/feature_icon_3.png" alt="">
                     <p>{{name}}</p>
-                    <h3>{{price}}VND<span>/{{term}}</span></h3>
+                    <h3>{{price}} VND<span>/{{term}}</span></h3>
                     <ul>
+                        <li>{{term}}</li>
+                        <li>{{limitNumberOfReq}} Request Limit</li>
+                        <li>24/7 Support</li>
                     </ul>
-                    <a href="#" class="btn_1">Choose Plane</a>
+                    <a href="#" class="btn_1">Buy</a>
                 </div>
             </div>
             {{/each}}
@@ -51,22 +53,4 @@
 <!-- pricing part end-->
 
 
-<!-- cta part start-->
-<section class="cta_part section_padding">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-xl-6">
-                <div class="cta_text text-center">
-                    <h2>Very useful Friendly</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo</p>
-                    <a href="#" class="btn_2 banner_btn_1">Get Started </a>
-                    <a href="#" class="btn_2 banner_btn_2">Sign up for free </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- cta part end-->
 {{>footer}}

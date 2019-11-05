@@ -64,7 +64,7 @@ app.use("/logout", require("./routes/logout"));
 app.use("/register", registerRouter);
 app.use("/dadangnhap", indexRouter);
 app.use("/transcribe", transcribeRouter);
-app.use("/getkey", getAudioApiRouter);
+app.use("/abcvoiceapi", getAudioApiRouter);
 app.use("/verify", verifyEmail);
 app.use("/apidoc", apiDocument);
 app.use("/price", price);
