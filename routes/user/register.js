@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-var userModel = require("../model/user.model");
+var userModel = require("../../model/user.model");
 var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const user = "edogawaconanhuyx98@gmail.com"
+const user = "edogawaconanhuyx98@gmail.com";
 const password = "Cotroimoibiet12";
 /* GET register page. */
 router.get("/", function(req, res, next) {
@@ -29,7 +29,7 @@ router.post("/", async (req, res, next) => {
         role: "user",
         name: "NoName",
         token,
-        isActivated:false
+        isActivated: false
       };
       try {
         const useradd = await userModel.add(data);
@@ -70,7 +70,7 @@ const sendmailActivate = async (req, res) => {
   console.log(mailOptions);
   smtpTransport.sendMail(mailOptions, function(error, response) {
     if (error) {
-      console.log("error------",process.env.NODEMAILER_PASSWORD);
+      console.log("error------", process.env.NODEMAILER_PASSWORD);
       res.send(process.env.NODEMAILER_PASSWORD);
     } else {
       console.log("Message sent: " + response.message);

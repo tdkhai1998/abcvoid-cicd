@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var bcrypt = require("bcrypt");
-var userModel = require("../model/user.model");
+var userModel = require("../../model/user.model");
 router.get("/", async (req, res, next) => {
   var message = "Lỗi xác thực";
   let user = req.user;
