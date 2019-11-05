@@ -9,24 +9,26 @@
                 <div class="col-lg-7">
                     <div class="banner_text">
                         <div class="banner_text_iner">
-                            <h1>Drive More Customers
-                                Through Digital</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam.</p>
-                            <a href="#" class="btn_2 banner_btn_1">Get Started </a>
-                            <a href="/register" class="btn_2 banner_btn_2">Sign up for free </a>
+                            <h1>Convert your audio file to text now!</h1>
+                            <div>
+                                <h3 style="font-size: 3.5em;">Format audio file</h3>
+                                <div style="font-size: 2.5em;">Type: .wav</div>
+                                <div style="font-size: 2.5em;">Bandwidth: 16000 Hz</div>
+
+                            </div>
+                            {{#if user}}
+                            {{else}}
+                                <a href="/register" class="btn_2 banner_btn_2">Sign up for free </a>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-5" style="text-align: center;">
                     <form action="/transcribe/uploadFile" enctype="multipart/form-data" method="POST">
 
 
 
                         <label class="custom-file-upload">
-                            <div class="txt-sm">Audio file <span id="cv-file-name"></span> <span>Supported format:
-                                    WAV</span></div>
                             <input class="btn_2 banner_btn_2" type="file" id="myFile" name="myFile" accept="audio/wav" required>
                         </label>
                         <div>
@@ -35,7 +37,7 @@
                     </form>
                     <div class="form-group">
                         <h3>{{descriptionFile}}</h3>
-                        <textarea readonly="true" class="form-control rounded-0" id="Textarea" rows="10"
+                        <textarea readonly="true" class="form-control rounded-0" id="Textarea" rows="7"
                             value={{jsonData}}>{{jsonData}}</textarea>
                     </div>
                     <div>

@@ -3,31 +3,12 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
-var indexRouter = require("./routes/index");
-var profileRouter = require("./routes/userInfo");
-var loginRouter = require("./routes/login");
-var recoverPassword = require("./routes/recoverPassword");
-var registerRouter = require("./routes/register");
-var transcribeRouter = require("./routes/transcribe");
-var getAudioApiRouter = require("./routes/api/jsonAudio");
-var verifyEmail = require("./routes/verifyEmail");
-var passwordForgot = require("./routes/passwordForgot");
-var registerRouter = require("./routes/register");
-var transcribeRouter = require("./routes/transcribe");
-var getAudioApiRouter = require("./routes/api/jsonAudio");
-var apiDocument = require("./routes/apidocument");
-var price = require("./routes/price");
-const paymentRouter = require("./routes/payment/payment");
 var app = express();
 
-//
 require("./middleware/session")(app);
 require("./middleware/passport")(app);
 require("dotenv").config();
-
 var hbs = require("express-handlebars");
-
 app.engine(
   "hbs",
   hbs({
@@ -43,11 +24,10 @@ app.engine(
   })
 );
 
-app.set("view engine", "hbs");
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
+
 // setting
 app.use(logger("dev"));
 app.use(express.json());
@@ -55,21 +35,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(require("./routes/genarateKey"));
+
 //routes
-app.use("/", indexRouter);
-app.use("/profile", profileRouter);
-app.use("/login", loginRouter);
-app.use("/forgotPassword", passwordForgot);
-app.use("/logout", require("./routes/logout"));
-app.use("/register", registerRouter);
-app.use("/dadangnhap", indexRouter);
-app.use("/transcribe", transcribeRouter);
-app.use("/abcvoiceapi", getAudioApiRouter);
-app.use("/verify", verifyEmail);
-app.use("/apidoc", apiDocument);
-app.use("/price", price);
-app.use("/recoverPassword", recoverPassword);
-app.use("/payment", paymentRouter);
+app.use("/", require("./routes/index"));
+app.use("/profile", require("./routes/user/userInfo"));
+app.use("/login", require("./routes/user/login"));
+app.use("/forgotPassword", require("./routes/user/passwordForgot.js"));
+app.use("/logout", require("./routes/user/logout"));
+app.use("/register", require("./routes/user/register"));
+app.use("/recoverPassword", require("./routes/user/recoverPassword"));
+app.use("/verify", require("./routes/user/verifyEmail"));
+
+app.use("/demo", require("./routes/demo"));
+app.use("/abcvoiceapi", require("./routes/api/jsonAudio"));
+app.use("/apidoc", require("./routes/apidocument"));
+app.use("/packages", require("./routes/packages"));
+app.use("/payment", require("./routes/apidocument"));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

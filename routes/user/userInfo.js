@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const userModel = require("../model/user.model");
-const toFunction = require("../util/toFunction");
+const userModel = require("../../model/user.model");
+const toFunction = require("../../util/toFunction");
 /* GET users listing. */
 router.get("/", async (req, res, next) => {
   const user = req.user;
