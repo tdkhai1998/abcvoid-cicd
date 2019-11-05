@@ -7,11 +7,11 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var userInfoRouter = require("./routes/userInfo");
 var loginRouter = require("./routes/login");
-var recoverPassword = require("./routes/recoverPassword")
+var recoverPassword = require("./routes/recoverPassword");
 var registerRouter = require("./routes/register");
 var transcribeRouter = require("./routes/transcribe");
-var getAudioApiRouter = require('./routes/api/jsonAudio');
-var verifyEmail = require('./routes/verifyEmail');
+var getAudioApiRouter = require("./routes/api/jsonAudio");
+var verifyEmail = require("./routes/verifyEmail");
 var passwordForgot = require("./routes/passwordForgot");
 var registerRouter = require("./routes/register");
 var transcribeRouter = require("./routes/transcribe");
@@ -24,7 +24,7 @@ var app = express();
 //
 require("./middleware/session")(app);
 require("./middleware/passport")(app);
-require('dotenv').config();
+require("dotenv").config();
 
 var hbs = require("express-handlebars");
 
@@ -35,9 +35,9 @@ app.engine(
     defaultLayout: "layout",
     layoutsDir: __dirname + "/views/",
     partialsDir: __dirname + "/views/partials/",
-    helpers:{
-      if_eq :  (a, b)=>  {
-        return (a===b)
+    helpers: {
+      if_eq: (a, b) => {
+        return a === b;
       }
     }
   })
@@ -65,11 +65,11 @@ app.use("/register", registerRouter);
 app.use("/dadangnhap", indexRouter);
 app.use("/transcribe", transcribeRouter);
 app.use("/getkey", getAudioApiRouter);
-app.use("/verify",verifyEmail);
+app.use("/verify", verifyEmail);
 app.use("/apidoc", apiDocument);
 app.use("/price", price);
-app.use("/recoverPassword",recoverPassword);
-app.use('/payment',paymentRouter);
+app.use("/recoverPassword", recoverPassword);
+app.use("/payment", paymentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
