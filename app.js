@@ -57,6 +57,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("./routes/genarateKey"));
 //routes
 app.use("/", indexRouter);
+
 app.use("/profile", profileRouter);
 app.use("/login", loginRouter);
 app.use("/forgotPassword", passwordForgot);
