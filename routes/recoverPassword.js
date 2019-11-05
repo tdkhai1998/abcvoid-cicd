@@ -31,6 +31,8 @@ router.get("/", async (req, res, next) => {
 });
 router.post("/", async (req, res, next) => {
   console.log("abc", req.body);
+  const user = req.user;
+  const body = req.body;
   if (req.body && req.body.email && req.body.password) {
     const password = bcrypt.hashSync(req.body.password, 10);
     await userModel.changePassword(req.body.email, password).catch(e => {
@@ -38,7 +40,32 @@ router.post("/", async (req, res, next) => {
     });
     res.redirect("./login");
   } else {
-    res.send("loi form");
+    
+    userModel
+      .findByEmail(user.email)
+      .then(rows => {
+        if (rows.length === 0) {
+          return res.send("loi form");
+        }
+
+        console.log("user--",body.old_password)
+        // var user = rows[0];
+        var ret = bcrypt.compareSync(body.old_password, rows[0].password);
+        console.log("ret",ret);
+        if (ret) {
+          const password = bcrypt.hashSync(body.password, 10);
+          userModel.changePassword(user.email, password).catch(e => {
+            console.log(e);
+            return res.send(e);
+          });
+          return res.redirect("./login");
+        }
+
+        return res.send("mat khau cu khong khop");
+      })
+      .catch(err => {
+        return res.send(err, false);
+      });
   }
 });
 module.exports = router;
