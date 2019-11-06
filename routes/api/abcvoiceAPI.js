@@ -11,7 +11,7 @@ const multer = require("multer");
 var storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === "audio/wave") {
+  if (file.mimetype === "audio/wav") {
     cb(null, true);
   } else {
     cb(new Error("Chỉ chấp nhận file .wav"), false);
@@ -69,17 +69,17 @@ router.post("/a", async (req, res, next) => {
   }
 });
 
-router.get("/", (req, res, next) => {
-  let jsonData = "";
-  let descriptionFile = "";
-  if (req.session.filename) {
-    jsonData = req.session.jsonData;
-    descriptionFile = req.session.filename;
-  }
-  res.render("callApi/callapi", {
-    title: "Phiên dịch",
-    jsonData: jsonData,
-    descriptionFile: descriptionFile
-  });
-});
+// router.get("/", (req, res, next) => {
+//   let jsonData = "";
+//   let descriptionFile = "";
+//   if (req.session.filename) {
+//     jsonData = req.session.jsonData;
+//     descriptionFile = req.session.filename;
+//   }
+//   res.render("callApi/callapi", {
+//     title: "Phiên dịch",
+//     jsonData: jsonData,
+//     descriptionFile: descriptionFile
+//   });
+// });
 module.exports = router;

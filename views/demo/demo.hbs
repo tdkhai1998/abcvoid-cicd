@@ -18,18 +18,22 @@
                             </div>
                             {{#if user}}
                             {{else}}
-                                <a href="/register" class="btn_2 banner_btn_2">Sign up for free </a>
+                            <a href="/register" class="btn_2 banner_btn_2">Sign up for free </a>
                             {{/if}}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5" style="text-align: center;">
-                    <form action="/transcribe/uploadFile" enctype="multipart/form-data" method="POST">
+                    <form action="/demo" enctype="multipart/form-data" method="POST">
 
 
 
                         <label class="custom-file-upload">
-                            <input class="btn_2 banner_btn_2" type="file" id="myFile" name="myFile" accept="audio/wav" required>
+                            <input class="btn_2 banner_btn_2" type="file" id="myFile" name="myFile" accept="audio/wav"
+                                required>
+
+                            <input type="text" name="apiKey" style="width: 100%" placeholder="Please input your API KEY"
+                                required />
                         </label>
                         <div>
                             <input type="submit" class="btn_2 banner_btn_1" value="convert" /><br>

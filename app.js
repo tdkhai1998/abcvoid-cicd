@@ -47,10 +47,10 @@ app.use("/recoverPassword", require("./routes/user/recoverPassword"));
 app.use("/verify", require("./routes/user/verifyEmail"));
 
 app.use("/demo", require("./routes/demo"));
-app.use("/abcvoiceapi", require("./routes/api/jsonAudio"));
+app.use("/abcvoiceapi", require("./routes/api/abcvoiceAPI"));
 app.use("/apidoc", require("./routes/apidocument"));
 app.use("/packages", require("./routes/packages"));
-app.use("/payment", require("./routes/apidocument"));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -70,10 +70,6 @@ app.use(function(err, req, res, next) {
 var server = app.listen(8000, function() {
   var host = server.address().address;
   var port = server.address().port;
-  console.log(
-    "Ung dung Node.js dang hoat dong tai dia chi: http://%s:%s",
-    host,
-    port
-  );
+  console.log("ABCVoice dang hoat dong tai dia chi: http://%s:%s", host, port);
 });
 module.exports = app;
