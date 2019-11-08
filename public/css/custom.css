@@ -1,17 +1,19 @@
-.group-social-button {
-  width: 100%;
-  display: inline-flex;
-  /* margin: 10px; */
-  /* margin-top: 10px; */
+.banner_part {
+  height: 810px;
+}
+.imgIndex {
+  height: 800px;
+}
+.inputform {
+  border: none !important;
+  background-color: RGB(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
 }
 
-.main_menu .main-menu-item.main-menu-item-user ul li .nav-link {
-  text-transform: none !important;
-}
-
-.main-menu-item.main-menu-item-user .dropdown-menu {
-  right: 0 !important;
-  left: unset !important;
+.use_sasu {
+  margin-top: 100px;
 }
 
 .banner_part .banner_text .banner_text_iner {
@@ -24,8 +26,7 @@
   width: 40px;
 }
 
-.banner_part.login-section .single-input,
-.banner_part.register-section .single-input {
+.single-input {
   margin: 0 auto;
   margin-bottom: 10px;
   width: 80%;
@@ -39,34 +40,77 @@
   border-radius: 20px;
   text-align: center;
   width: 40%;
-  height: 50px;
-  padding: 5px;
+  height: 20px;
 }
 
-.banner_part.login-section,
-.banner_part.register-section {
-  height: 810px;
+.banner_part {
+  height: 800px;
 }
 
-.banner_part.login-section .landing,
-.banner_part.register-section .landing {
+.landing {
   background-color: whitesmoke;
   padding: 10px;
   border-radius: 20px;
   width: 40%;
 }
 
-.banner_part.login-section,
-.banner_part.register-section {
+.inputform {
   border: 1px solid whitesmoke;
   padding: 20px;
   border-radius: 20px;
+}
+
+@media (max-width: 576px) {
+  .logo {
+    max-width: 100px;
+    padding: 2px;
+  }
+}
+
+.section_tittle p {
+  text-transform: none;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.api-title {
+  text-align: center !important;
+}
+
+.inputFileForm {
+  height: 400px;
+}
+.custom-file-upload {
+  border: none;
+}
+
+.group-social-button {
+  width: 100%;
+  display: inline-flex;
+}
+
+.signupform {
+  margin-top: 160px;
+  width: 40px;
+}
+
+.signupBtn {
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-align: center;
+  width: 40%;
+  height: 50px;
+  padding: 5px;
 }
 
 .logo {
   width: 150px;
   padding: 5px;
   margin: 0 auto;
+  display: block;
 }
 
 @media (max-width: 576px) {
@@ -96,7 +140,7 @@
 .custom-file-upload {
   display: inline-block;
   padding: 18.5px 33px;
-  border-radius: 5px;
+
   background-color: #fff;
   font-size: 15px;
   font-family: "Poppins", sans-serif;
@@ -104,10 +148,10 @@
   color: #1a1a1a;
   transition: all 0.4s ease-in-out;
   text-transform: capitalize;
-  border: 1px solid #8f9091;
+
   background-size: 200% auto;
   color: #fff;
-  border: 1px solid #fff;
+
   background-color: transparent;
 }
 
@@ -116,16 +160,6 @@
   content: url("../img/lock-forgotpassword.png");
   height: 30%;
   width: 30%;
-}
-
-.banner_img.d-none.d-lg-block {
-  text-align: center;
-  padding: 10px;
-}
-
-.banner_img.d-none.d-lg-block.forgotPasswordArea {
-  border: 1px solid whitesmoke;
-  border-radius: 20px;
 }
 
 .forgotPasswordArea > .inputform {
@@ -178,11 +212,6 @@ h2[class="userInfo"] {
   font-size: 50px !important;
 }
 
-.userInfo .breadcrumb_iner_item {
-  /* float: right !important; */
-  text-align: center !important;
-}
-
 .userInfo .breadcrumb_iner.text-center {
   height: 500px !important;
   padding-left: 25%;
@@ -207,4 +236,10 @@ h2[class="userInfo"] {
 
 .userInfo .single-input {
   border-radius: 20px;
+}
+
+.passwordTitle {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
