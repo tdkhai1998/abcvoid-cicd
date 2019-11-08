@@ -43,7 +43,7 @@ const sendOTPToMail =  (req,res, email,OTP) => {
       res.end("error");
     } else {
       console.log("Message sent: " + response.message);
-      res.end("sent");
+      res.end("OTP sent to mail");
     }
   });
 }
