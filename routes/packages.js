@@ -30,7 +30,7 @@ const sendOTPToMail =  (req,res, email,OTP) => {
   const link = "http://" + req.get("host") + "/packages/verify" 
   const mailOptions = {
     to: email,
-    subject: "XÁC NHẬN THANH TOÁN PACKAGES API ABC VOICE",
+    subject: "XÁC NHẬN THANH TOÁN PACKAGE API ABC VOICE",
     html:
       "Chào bạn!,<br> Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi, hãy click vào đường dẫn bên dưới để hoàn tất quá trình thanh toán package ABC VOICE<br><br>Đây là mã code của bạn: " +OTP+"<br><a href=" +
       link +
