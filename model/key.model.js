@@ -15,7 +15,7 @@ module.exports = {
     return db.update('api_key', idField, entity);
   },
   getKeyById: id => {
-    return db.load(`select * from api_key where user_id=${id} and valid=1`)
+    return db.load(`select * from api_key where user_id='${id}' and valid=1`)
   },
   getKeyByTransactionId: transactionId => {
     return db.load(`select * from api_key where transactionId='${transactionId}'`);
@@ -23,7 +23,7 @@ module.exports = {
   update: entity => {
     db.update("api_key", "id", entity);
   },
-  createEntity: (packages, userId,OTP) => {    
+  createEntity: (packages, userId,OTP) => {
     const entity={};
     const today = new Date();
     entity.value=genKey();
