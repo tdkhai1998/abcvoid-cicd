@@ -95,17 +95,31 @@ router.get("/verify", function(req, res, next) {
   
   
 });
-router.post("/verify", function(req, res, next) {
+router.post("/verify", async (req, res, next) => {
   console.log(req.user);
   const user = req.user;
   if(!user)
   {
     return res.redirect("/login");  
   }
-  
-  return res.render("checkcode/checkcode",{
-    user
-  });
+  const code = req.body.code;
+  const api_key = await toFunc(keyModel.getKeyByTransactionId(code));
+  if(api_key[0])
+  {
+    next(api_key[0]);
+  }
+  else {
+    api_key[1][0].valid = true;
+    console.log(api_key[1][0]);
+    const result = await toFunc(keyModel.update(api_key[1][0]));
+    if(result[0])
+    {
+      next(result[0]);
+    }
+    else {
+      res.redirect("/profile");
+    }
+  }
   
   
 });
