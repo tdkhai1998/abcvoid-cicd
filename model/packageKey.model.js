@@ -7,6 +7,9 @@ module.exports = {
     getAll: () => {
         return db.load(`select * from KeyPackages`);
     },
+    findOne: (id) => {
+        return db.load(`select * from KeyPackages where id=${id}`);
+    },  
     createEntity: () => ({
         user: "",
         key: ""

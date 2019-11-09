@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var packageKeyModel = require("../model/packageKey.model");
+var keyModel = require("../model/key.model");
 var toFunc = require("../util/toFunction");
 var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
@@ -38,28 +39,42 @@ const sendOTPToMail = (req, res, email, OTP) => {
       ">Click để xác nhận </a>"
   };
   console.log(mailOptions);
-  smtpTransport.sendMail(mailOptions, (error, response) => {
+  return smtpTransport.sendMail(mailOptions, (error, response) => {
     if (error) {
       console.log(error);
-      res.end("error");
+      return error;
     } else {
       console.log("Message sent: " + response.message);
-      res.end("OTP sent to mail");
+      return null;
     }
   });
 };
 router.get("/buy/:id", async (req, res, next) => {
   const user = req.user;
+  const message = "Check email đeeeeeee";
+  const idPackage = req.params.id;
   if (!user) {
     res.redirect("/login");
   }
   const token = bcrypt.hashSync(user.email, 0);
-  const OTP = `G${req.params.id}-${token}`;
-  sendOTPToMail(req, res, user.email, OTP);
-});
-
-router.get("/verify", function(req, res, next) {
-  console.log(req.user);
-  res.render("checkcode/checkcode");
+  const OTP = `G${idPackage}-${token}`;
+  const packages = await toFunc(packageKeyModel.findOne(idPackage));
+  if (packages[0]) {
+    next(packages[0]);
+  } else {
+    console.log("packages", packages[1][0]);
+    const entity = keyModel.createEntity(packages[1][0], user.id, OTP);
+    const result = await toFunc(keyModel.add(entity));
+    if (result[0]) {
+      next(result[0]);
+    } else {
+      const isErr = sendOTPToMail(req, res, user.email, OTP);
+      if (isErr) {
+        next(isErr);
+      } else {
+        res.redirect("/");
+      }
+    }
+  }
 });
 module.exports = router;
