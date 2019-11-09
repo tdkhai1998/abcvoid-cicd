@@ -243,3 +243,9 @@ h2[class="userInfo"] {
   align-items: center;
   flex-direction: column;
 }
+.modal {
+  top: 150px;
+}
+.modal-header {
+  background: #33b5e5;
+}

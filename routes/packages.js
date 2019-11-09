@@ -25,14 +25,15 @@ const smtpTransport = nodemailer.createTransport({
     pass: password
   }
 });
-const sendOTPToMail =  (req,res, email,OTP) => {
-
-  const link = "http://" + req.get("host") + "/packages/verify" 
+const sendOTPToMail = (req, res, email, OTP) => {
+  const link = "http://" + req.get("host") + "/packages/verify";
   const mailOptions = {
     to: email,
     subject: "XÁC NHẬN THANH TOÁN PACKAGE API ABC VOICE",
     html:
-      "Chào bạn!,<br> Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi, hãy click vào đường dẫn bên dưới để hoàn tất quá trình thanh toán package ABC VOICE<br><br>Đây là mã code của bạn: " +OTP+"<br><a href=" +
+      "Chào bạn!,<br> Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi, hãy click vào đường dẫn bên dưới để hoàn tất quá trình thanh toán package ABC VOICE<br><br>Đây là mã code của bạn: " +
+      OTP +
+      "<br><a href=" +
       link +
       ">Click để xác nhận </a>"
   };
@@ -46,15 +47,19 @@ const sendOTPToMail =  (req,res, email,OTP) => {
       res.end("OTP sent to mail");
     }
   });
-}
-router.get("/buy/:id",async (req,res,next) => {
-  const user = req.user
-    if(!user) {
-      res.redirect("/login");
-    }
-    const token = bcrypt.hashSync(user.email,0);
-    const OTP = `G${req.params.id}-${token}`;
-    sendOTPToMail(req,res,user.email,OTP);
-    
-})
+};
+router.get("/buy/:id", async (req, res, next) => {
+  const user = req.user;
+  if (!user) {
+    res.redirect("/login");
+  }
+  const token = bcrypt.hashSync(user.email, 0);
+  const OTP = `G${req.params.id}-${token}`;
+  sendOTPToMail(req, res, user.email, OTP);
+});
+
+router.get("/verify", function(req, res, next) {
+  console.log(req.user);
+  res.render("checkcode/checkcode");
+});
 module.exports = router;
