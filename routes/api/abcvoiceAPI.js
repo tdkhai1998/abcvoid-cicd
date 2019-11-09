@@ -30,7 +30,7 @@ router.post("/", upload.single("myFile"), async (req, res, next) => {
   const file = req.file;
   const apiKey = req.body.apiKey;
   const rows = await keyModel.searchKey(apiKey);
-  if (rows.length === 0) {
+  if (rows.length === 0 || rows[0].valid === 0) {
     console.log("hahahahahha");
     const error = new Error("API KEY invalid");
     error.httpStatusCode = 400;
