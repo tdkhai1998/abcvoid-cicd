@@ -19,6 +19,7 @@ router.get("/", async (req, res, next) => {
   if (infoUser[0] || listKey[0]) {
     return next(infoUser[0]);
   }
+  console.log('listKey----', listKey[1]);
   res.render("userInfo/userInfo", {
     user,
     listKey: listKey[1],
@@ -32,8 +33,8 @@ router.post("/updatekey", async (req,res,next) => {
   res.redirect("/profile");
 });
 router.post("/renewkey", async (req, res, next) => {
-  let key = await apiKeyModel.singleById(req.body.id);
-  let packageInfo = await packageModel.singleById(key[0].id_package);
+  let key = await apiKeyModel.singleById(req.body.idKey);
+  let packageInfo = await packageModel.singleById(req.body.id_package);
   key[0].date_expired = moment(key[0].date_expired).add(packageInfo[0].term, 'days').format('YYYY-MM-DD');
   await apiKeyModel.update('id',key[0]);
   res.redirect("/profile");
