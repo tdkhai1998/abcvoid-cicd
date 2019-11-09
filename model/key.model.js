@@ -9,7 +9,7 @@ module.exports = {
     return db.load(`select * from api_key where value='${id}'`);
   },
   singleById: id => {
-    return db.load(`select * from api_key where value='${id}'`);
+    return db.load(`select * from api_key where id='${id}'`);
   },
   update: (idField, entity) => {
     return db.update('api_key', idField, entity);
@@ -17,7 +17,13 @@ module.exports = {
   getKeyById: id => {
     return db.load(`select * from api_key where user_id=${id} and valid=1`)
   },
-  createEntity: (packages, userId,OTP) => {
+  getKeyByTransactionId: transactionId => {
+    return db.load(`select * from api_key where transactionId='${transactionId}'`);
+  },
+  update: entity => {
+    db.update("api_key", "id", entity);
+  },
+  createEntity: (packages, userId,OTP) => {    
     const entity={};
     const today = new Date();
     entity.value=genKey();
