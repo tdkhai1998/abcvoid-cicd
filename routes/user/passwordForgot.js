@@ -40,9 +40,9 @@ const sendmailRecover = async (req, res, email) => {
   const link = "http://" + req.get("host") + "/recoverPassword?id=" + token;
   const mailOptions = {
     to: email,
-    subject: "Phục hồi tài khoản shop master",
+    subject: "Phục hồi tài khoản ABC VOICE",
     html:
-      "Chào bạn!,<br> Hãy click vào đường dẫn bên dưới để phục hồi mật khẩu tài khoản Shop Master<br><a href=" +
+      "Chào bạn!,<br> Hãy click vào đường dẫn bên dưới để phục hồi mật khẩu tài khoản ABC VOICE<br><a href=" +
       link +
       ">Click để phục hồi</a>"
   };
