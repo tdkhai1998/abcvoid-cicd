@@ -18,7 +18,7 @@ router.post("/", async (req, res, next) => {
     if (!email || !password) {
       res.render("register/register", {
         title: "Đăng ký",
-        message: "Thiếu trường"
+        message: "Missing parameters"
       });
       return;
     }
@@ -26,7 +26,7 @@ router.post("/", async (req, res, next) => {
     if (email_user.length > 0) {
       res.render("register/register", {
         title: "Đăng ký",
-        message: "Tài khoản đã tồn tại"
+        message: "Username existed"
       });
       return;
     } else {
@@ -49,14 +49,14 @@ router.post("/", async (req, res, next) => {
       } else {
         return res.render("register/register", {
           title: "Đăng ký",
-          message: "Đăng ký thất bại"
+          message: "Register failed"
         });
       }
     }
   } else {
     return res.render("register/register", {
       title: "Đăng ký",
-      message: "Thiếu trường"
+      message: "Missing parameters"
     });
   }
 });
