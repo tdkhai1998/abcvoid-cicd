@@ -243,3 +243,9 @@ h2[class="userInfo"] {
   align-items: center;
   flex-direction: column;
 }
+.modal {
+  top: 150px;
+}
+.modal-header {
+  background: linear-gradient(to left, #00b4ff 0%, #57ddff 51%, #00b4ff 100%);
+}

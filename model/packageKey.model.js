@@ -10,6 +10,9 @@ module.exports = {
     singleById: id => {
         return db.load(`select * from KeyPackages where id=${id}`)
     },
+    findOne: (id) => {
+        return db.load(`select * from KeyPackages where id=${id}`);
+    },
     createEntity: () => ({
         user: "",
         key: ""

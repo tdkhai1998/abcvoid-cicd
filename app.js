@@ -49,7 +49,7 @@ app.use("/demo", require("./routes/demo"));
 app.use("/abcvoiceapi", require("./routes/api/abcvoiceAPI"));
 app.use("/apidoc", require("./routes/apidocument"));
 app.use("/packages", require("./routes/packages"));
-app.use("/checkcode", require("./routes/checkcode/checkcode"));
+app.use("/error", require("./routes/error/error"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,7 +64,15 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error", { layout: false, err });
+  if (err.status === 404) {
+    res.redirect("/error/404");
+    return;
+  }
+  if (err.status === 403) {
+    res.redirect("/error/403");
+    return;
+  }
+  res.render("error/normalError", { message: err.message });
 });
 
 var server = app.listen(8000, function() {

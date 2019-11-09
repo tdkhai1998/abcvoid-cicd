@@ -1,11 +1,13 @@
 var express = require("express");
 var router = express.Router();
 var packageKeyModel = require("../model/packageKey.model");
+var keyModel = require("../model/key.model");
 var toFunc = require("../util/toFunction");
 var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const user = "edogawaconanhuyx98@gmail.com";
 const password = "Cotroimoibiet12";
+let message = false;
 /* GET home page. */
 router.get("/", async function(req, res, next) {
   console.log(req.user);
@@ -14,8 +16,10 @@ router.get("/", async function(req, res, next) {
   res.render("packages/packages", {
     title: "Express",
     user: req.user,
-    listKey: listKey[0] === null ? listKey[1] : "error"
+    listKey: listKey[0] === null ? listKey[1] : "error",
+    message: message
   });
+  message = false;
 });
 const smtpTransport = nodemailer.createTransport({
   host: "gmail.com",
@@ -25,36 +29,59 @@ const smtpTransport = nodemailer.createTransport({
     pass: password
   }
 });
-const sendOTPToMail =  (req,res, email,OTP) => {
-
-  const link = "http://" + req.get("host") + "/packages/verify" 
+const sendOTPToMail = (req, res, email, OTP) => {
+  const link = "http://" + req.get("host") + "/packages/verify";
   const mailOptions = {
     to: email,
     subject: "XÁC NHẬN THANH TOÁN PACKAGE API ABC VOICE",
     html:
-      "Chào bạn!,<br> Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi, hãy click vào đường dẫn bên dưới để hoàn tất quá trình thanh toán package ABC VOICE<br><br>Đây là mã code của bạn: " +OTP+"<br><a href=" +
+      "Chào bạn!,<br> Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi, hãy click vào đường dẫn bên dưới để hoàn tất quá trình thanh toán package ABC VOICE<br><br>Đây là mã code của bạn: " +
+      OTP +
+      "<br><a href=" +
       link +
       ">Click để xác nhận </a>"
   };
   console.log(mailOptions);
-  smtpTransport.sendMail(mailOptions, (error, response) => {
+  return smtpTransport.sendMail(mailOptions, (error, response) => {
     if (error) {
       console.log(error);
-      res.end("error");
+      return error;
     } else {
       console.log("Message sent: " + response.message);
-      res.end("OTP sent to mail");
+      return null;
     }
   });
-}
-router.get("/buy/:id",async (req,res,next) => {
-  const user = req.user
-    if(!user) {
-      res.redirect("/login");
+};
+router.get("/buy/:id", async (req, res, next) => {
+  const user = req.user;
+
+  const idPackage = req.params.id;
+  if (!user) {
+    res.redirect("/login");
+  }
+  const token = bcrypt.hashSync(user.email, 0);
+  const OTP = `G${idPackage}-${token}`;
+  const packages = await toFunc(packageKeyModel.findOne(idPackage));
+  if (packages[0]) {
+    next(packages[0]);
+  } else {
+    const entity = keyModel.createEntity(packages[1][0], user.id, OTP);
+    const result = await toFunc(keyModel.add(entity));
+    if (result[0]) {
+      next(result[0]);
+    } else {
+      const isErr = sendOTPToMail(req, res, user.email, OTP);
+      if (isErr) {
+        next(isErr);
+      } else {
+        message = "Code's sent to your email. Please check !";
+        res.redirect("/packages");
+      }
     }
-    const token = bcrypt.hashSync(user.email,0);
-    const OTP = `G${req.params.id}-${token}`;
-    sendOTPToMail(req,res,user.email,OTP);
-    
-})
+  }
+});
+router.get("/verify", function(req, res, next) {
+  console.log(req.user);
+  res.render("checkcode/checkcode");
+});
 module.exports = router;
