@@ -1,0 +1,32 @@
+{{>header user=this.user}}
+<!-- banner part start-->
+{{>header user=this.user}}
+
+<section class="breadcrumb breadcrumb_bg userInfo">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2 class="userInfo">Validate Key Code</h2>
+                        <form method="POST">
+                            <div class="formElement">
+
+                                <input name="code" type="text" placeholder="Type your code here"
+                                    onfocus="this.placeholder = 'Type your code here'"
+                                    onblur="this.placeholder = 'Type your code here'" required class="single-input">
+                            </div>
+                            <div class="formElement">
+                                <button type="submit" class="btn_2 banner_btn_2 saveInfo" placeholder="Save"
+                                    value="">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+{{>footer}}
