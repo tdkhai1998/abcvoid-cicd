@@ -64,7 +64,6 @@ router.get("/buy/:id",async (req,res,next) => {
     }
     else
     {
-      console.log("packages",packages[1][0]);
       const entity = keyModel.createEntity(packages[1][0],user.id,OTP);
       const result = await toFunc(keyModel.add(entity));
       if(result[0])
