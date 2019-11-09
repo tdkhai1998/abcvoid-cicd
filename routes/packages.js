@@ -26,19 +26,20 @@ const smtpTransport = nodemailer.createTransport({
     pass: password
   }
 });
-const sendOTPToMail =  (req,next, email,OTP) => {
-
-  const link = "http://" + req.get("host") + "/packages/verify" 
+const sendOTPToMail = (req, res, email, OTP) => {
+  const link = "http://" + req.get("host") + "/packages/verify";
   const mailOptions = {
     to: email,
     subject: "XÁC NHẬN THANH TOÁN PACKAGE API ABC VOICE",
     html:
-      "Chào bạn!,<br> Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi, hãy click vào đường dẫn bên dưới để hoàn tất quá trình thanh toán package ABC VOICE<br><br>Đây là mã code của bạn: " +OTP+"<br><a href=" +
+      "Chào bạn!,<br> Cảm ơn bạn đã tin tưởng và lựa chọn chúng tôi, hãy click vào đường dẫn bên dưới để hoàn tất quá trình thanh toán package ABC VOICE<br><br>Đây là mã code của bạn: " +
+      OTP +
+      "<br><a href=" +
       link +
       ">Click để xác nhận </a>"
   };
   console.log(mailOptions);
- return smtpTransport.sendMail(mailOptions, (error, response) => {
+  return smtpTransport.sendMail(mailOptions, (error, response) => {
     if (error) {
       console.log(error);
       return error;
@@ -47,43 +48,36 @@ const sendOTPToMail =  (req,next, email,OTP) => {
       return null;
     }
   });
-}
-router.get("/buy/:id",async (req,res,next) => {
+};
+router.get("/buy/:id", async (req, res, next) => {
   const user = req.user;
   const message = "Check email đeeeeeee";
   const idPackage = req.params.id;
-    if(!user) {
-      res.redirect("/login");
-    }
-    const token = bcrypt.hashSync(user.email,0);
-    const OTP = `G${idPackage}-${token}`;
-    const packages = await toFunc(packageKeyModel.findOne(idPackage));
-    if (packages[0])
-    {
-      next(packages[0]);
-    }
-    else
-    {
-      const entity = keyModel.createEntity(packages[1][0],user.id,OTP);
-      const result = await toFunc(keyModel.add(entity));
-      if(result[0])
-      {
-        next(result[0]);
-      }
-      else {
-        const isErr = sendOTPToMail(req, res, user.email, OTP);
-        if (isErr)
-        {
-          next(isErr);
-        }
-        else
-        {
-          res.redirect("/");
-        }
-         
+  if (!user) {
+    res.redirect("/login");
+  }
+  const token = bcrypt.hashSync(user.email, 0);
+  const OTP = `G${idPackage}-${token}`;
+  const packages = await toFunc(packageKeyModel.findOne(idPackage));
+  if (packages[0]) {
+    next(packages[0]);
+  } else {
+    const entity = keyModel.createEntity(packages[1][0], user.id, OTP);
+    const result = await toFunc(keyModel.add(entity));
+    if (result[0]) {
+      next(result[0]);
+    } else {
+      const isErr = sendOTPToMail(req, res, user.email, OTP);
+      if (isErr) {
+        next(isErr);
+      } else {
+        res.redirect("/");
       }
     }
-
-    
-})
+  }
+});
+router.get("/verify", function(req, res, next) {
+  console.log(req.user);
+  res.render("checkcode/checkcode");
+});
 module.exports = router;

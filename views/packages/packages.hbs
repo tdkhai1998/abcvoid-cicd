@@ -1,6 +1,34 @@
+<!--Modal: modalPush-->
+<div class="modal fade show" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="display:block">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Thông báo</p>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <i class="fas fa-bell fa-4x animated rotateIn mb-4"></i>
+                <p>Do you want to receive the push notification about the newest posts?</p>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <button type="button" class="btn btn-primary">Yes</button>
+                <button type="button" class="closeModalBtn btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: modalPush-->
+
+
 {{>header user=this.user}}
 <!-- banner part start-->
 {{>header user=this.user}}
+
 
 <section class="breadcrumb breadcrumb_bg">
     <div class="container">
@@ -10,7 +38,7 @@
                     <div style="height:100px" class="breadcrumb_iner_item">
                         <h2>Packages Price</h2>
                     </div>
-                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,7 +52,8 @@
             <div class="col-lg-6">
                 <div class="section_tittle text-center">
                     <h2>Simple Pricing</h2>
-
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPush">Launch
+                        modal</button>
                 </div>
             </div>
         </div>
@@ -40,7 +69,7 @@
                         <li>{{limitNumberOfReq}} Request Limit</li>
                         <li>24/7 Support</li>
                     </ul>
-                    <a href="/packages/buy/{{id}}"  class="btn_1">Buy</a>
+                    <a href="/packages/buy/{{id}}" class="btn_1">Buy</a>
                 </div>
             </div>
             {{/each}}
