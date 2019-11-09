@@ -1,10 +1,7 @@
 {{>header user=this.user}}
 <!-- banner part start-->
 {{>header user=this.user}}
-<script>
-    let info = "{{ this.info.message }}"
-    if (info) alert(info)
-</script>
+
 <section class="banner_part login-section">
     <div class="container">
         <div class="row">
@@ -20,7 +17,9 @@
                 <div class="banner_img d-none d-lg-block">
                     <form class="inputform" action="/login" method="POST">
                         <img class="logo" src="/img/logo.png" alt="logo">
+
                         <div class="mt-10">
+                            <label style="color: red; text-align:center">{{info.message}}</label>
                             <input type="email" name="email" placeholder="Your email" onfocus="this.placeholder"
                                 onblur="this.placeholder" required class="single-input">
                         </div>
