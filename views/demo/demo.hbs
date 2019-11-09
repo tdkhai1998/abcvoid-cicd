@@ -2,98 +2,106 @@
 <!-- banner part start-->
 {{>header user=this.user}}
 <section class="banner_part register-section">
-    <div class="container">
-        <div class="row">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <div class="banner_text">
-                        <div class="banner_text_iner">
-                            <h1>Convert your audio file to text now!</h1>
-                            <div>
-                                <h4 style="font-size: 3.5em;">Format audio file</h4>
-                                <div style="font-size: 2.5em;">Type: .wav</div>
-                                <div style="font-size: 2.5em;">Bandwidth: 16000 Hz</div>
-
-                            </div>
-                            {{!-- {{#if user}}
-                            {{else}}
-                            <a href="/register" class="btn_2 banner_btn_2">Sign up for free </a>
-                            {{/if}} --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5" style="height: 700px ;text-align: center">
-                    <form class="inputFileForm" action="/demo" enctype="multipart/form-data" method="POST">
-
-
-
-                        <label class="custom-file-upload">
-                            <input class="btn_2 banner_btn_2" type="file" id="myFile" name="myFile" accept="audio/wav"
-                                required>
-
-
-                        </label>
-                        <div>
-                            <input type="submit" class="btn_2 banner_btn_1" value="convert" /><br>
-                        </div>
-                        <h3>{{descriptionFile}}</h3>
-                        <textarea readonly="true" class="form-control rounded-0" id="Textarea" rows="7"
-                            value={{jsonData}}>{{jsonData}}</textarea>
-                    </form>
-
-                    <div>
-                        <input id="download" type="button" class="btn_2 banner_btn_1" onclick="clickHandler()"
-                            value="Download" /><br>
-                    </div>
-                </div>
-
-
-
-
+  <div class="container">
+    <div class="row">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="banner_text">
+            <div class="banner_text_iner">
+              <h1>Convert your audio file to text now!</h1>
+              <div>
+                <h4 style="font-size: 3.5em;">Format audio file</h4>
+                <div style="font-size: 2.5em;">Type: .wav</div>
+                <div style="font-size: 2.5em;">Bandwidth: 16000 Hz</div>
+              </div>
+              {{!-- {{#if user}}
+              {{else}}
+              <a href="/register" class="btn_2 banner_btn_2"
+                >Sign up for free
+              </a>
+              {{/if}} --}}
             </div>
-            </form>
-
-
-
+          </div>
         </div>
+        <div class="col-lg-5" style="height: 700px ;text-align: center">
+          <form
+            class="inputFileForm"
+            action="/demo"
+            enctype="multipart/form-data"
+            method="POST"
+          >
+            <label class="custom-file-upload">
+              <input
+                class="btn_2 banner_btn_2"
+                type="file"
+                id="myFile"
+                name="myFile"
+                accept="audio/wav"
+                required
+              />
+            </label>
+            <div>
+              <input
+                type="submit"
+                class="btn_2 banner_btn_1"
+                value="convert"
+              /><br />
+            </div>
+            <h3>{{ descriptionFile }}</h3>
+            <textarea
+              readonly="true"
+              class="form-control rounded-0"
+              id="Textarea"
+              rows="7"
+              value="{{ jsonData }}"
+              >{{ jsonData }}</textarea
+            >
+          </form>
+          <div>
+            <input
+              id="download"
+              type="button"
+              class="btn_2 banner_btn_1"
+              onclick="clickHandler()"
+              value="Download"
+            /><br />
+          </div>
+        </div>
+      </div>
     </div>
-
+  </div>
 </section>
 
 <script>
+  function clickHandler() {
+    var textFile = null,
+      makeTextFile = function(text) {
+        var data = new Blob([text], { type: "application/msword" });
 
+        // If we are replacing a previously generated file we need to
+        // manually revoke the object URL to avoid memory leaks.
+        if (textFile !== null) {
+          window.URL.revokeObjectURL(textFile);
+        }
 
-    function clickHandler() {
-        var textFile = null,
-            makeTextFile = function (text) {
-                var data = new Blob([text], { type: 'application/msword' });
+        textFile = window.URL.createObjectURL(data);
 
-                // If we are replacing a previously generated file we need to
-                // manually revoke the object URL to avoid memory leaks.
-                if (textFile !== null) {
-                    window.URL.revokeObjectURL(textFile);
-                }
+        return textFile;
+      };
 
-                textFile = window.URL.createObjectURL(data);
+    let textbox = document.getElementById("Textarea");
+    var link = document.createElement("a");
+    link.setAttribute("download", "output");
+    link.href = makeTextFile(textbox.value);
+    document.body.appendChild(link);
 
-                return textFile;
-            };
-
-
-
-        let textbox = document.getElementById('Textarea');
-        var link = document.createElement('a');
-        link.setAttribute('download', 'output');
-        link.href = makeTextFile(textbox.value);
-        document.body.appendChild(link);
-
-        // wait for the link to be added to the document
-        window.requestAnimationFrame(function () {
-            var event = new MouseEvent('click');
-            link.dispatchEvent(event);
-            document.body.removeChild(link);
-        });
-    }
+    // wait for the link to be added to the document
+    window.requestAnimationFrame(function() {
+      var event = new MouseEvent("click");
+      link.dispatchEvent(event);
+      document.body.removeChild(link);
+    });
+  }
 </script>
 
 <!-- banner part end-->
