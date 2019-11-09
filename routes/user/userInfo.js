@@ -7,17 +7,14 @@ let message = false;
 router.get("/", async (req, res, next) => {
   const user = req.user;
   console.log(user);
-  const listKey = await toFunction(apiKeyModel.getKeyById(user.id));
-  listKey[1] = listKey[1].map(elem => {
-    elem.date_expired =  moment(elem.date_expired).format('DD/MM/YYYY');
-    return elem;
-  });
-  if (listKey[0]) {
+  const infoUser = await toFunction(userModel.findApiKeys(user.id));
+  if (infoUser[0]) {
     return next(infoUser[0]);
   }
   res.render("userInfo/userInfo", {
     user,
-    listKey: listKey[1],
+    packages: infoUser[1],
+    message
   });
   message = false;
 });
