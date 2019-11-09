@@ -83,44 +83,47 @@ router.get("/buy/:id", async (req, res, next) => {
 router.get("/verify", function(req, res, next) {
   console.log(req.user);
   const user = req.user;
-  if(!user)
-  {
-    return res.redirect("/login");  
+  if (!user) {
+    return res.redirect("/login");
   }
-  
-  return res.render("checkcode/checkcode",{
-    title:"Verify OTP",
-    user
+
+  res.render("checkcode/checkcode", {
+    title: "Verify OTP",
+    user,
+    message
   });
-  
-  
+  message = false;
 });
 router.post("/verify", async (req, res, next) => {
   console.log(req.user);
   const user = req.user;
-  if(!user)
-  {
-    return res.redirect("/login");  
+  if (!user) {
+    return res.redirect("/login");
   }
   const code = req.body.code;
+  console.log("code---", code);
   const api_key = await toFunc(keyModel.getKeyByTransactionId(code));
-  if(api_key[0])
-  {
+  if (api_key[0]) {
     next(api_key[0]);
-  }
-  else {
-    api_key[1][0].valid = true;
-    console.log(api_key[1][0]);
-    const result = await toFunc(keyModel.update(api_key[1][0]));
-    if(result[0])
-    {
-      next(result[0]);
+  } else {
+    if (api_key[1].length === 0) {
+      message = "OTP code is invalid please try again :( !";
+      console.log("messs---",message);
+      
+    } else {
+      console.log("valid---", api_key[1][0]);
+      api_key[1][0].valid = true;
+
+      // const result = await toFunc(keyModel.update(api_key[1][0]));
+      // if (result[0]) {
+      //   next(result[0]);
+      // } else {
+        keyModel.update(api_key[1][0])
+        message = "Your key is activated successfully !!!"
+        //res.redirect("/");
+      //}
     }
-    else {
-      res.redirect("/profile");
-    }
+    res.redirect("/packages/verify");
   }
-  
-  
 });
 module.exports = router;
