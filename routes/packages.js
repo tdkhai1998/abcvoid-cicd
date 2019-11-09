@@ -47,14 +47,14 @@ const sendOTPToMail =  (req,res, email,OTP) => {
     }
   });
 }
-router.get("/buy",async (req,res,next) => {
+router.get("/buy/:id",async (req,res,next) => {
   const user = req.user
     if(!user) {
       res.redirect("/login");
     }
     const token = bcrypt.hashSync(user.email,0);
-    const OTP = `G${req.query.id}-${token}`;
+    const OTP = `G${req.params.id}-${token}`;
     sendOTPToMail(req,res,user.email,OTP);
-    // add OTP vào DB
+    
 })
 module.exports = router;
