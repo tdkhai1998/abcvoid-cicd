@@ -27,7 +27,6 @@ module.exports = {
     entity.date_expired = new Date(date_expired.setDate(today.getDate() + packages.term));
     entity.name_package = packages.name;
     entity.transactionId = OTP;
-    console.log("entity---",entity);
     return entity;
   }
 };
