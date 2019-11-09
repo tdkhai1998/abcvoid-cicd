@@ -77,4 +77,8 @@ router.get("/buy/:id", async (req, res, next) => {
     }
   }
 });
+router.get("/verify", function(req, res, next) {
+  console.log(req.user);
+  res.render("checkcode/checkcode");
+});
 module.exports = router;
