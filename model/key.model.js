@@ -11,8 +11,11 @@ module.exports = {
   singleById: id => {
     return db.load(`select * from api_key where value='${id}'`);
   },
-  update: (tableName, idField, entity) => {
-    db.update(tableName, idField, entity);
+  update: (idField, entity) => {
+    return db.update('api_key', idField, entity);
+  },
+  getKeyById: id => {
+    return db.load(`select * from api_key INNER JOIN KeyPackages  on api_key.id_package=KeyPackages.id and user_id=${id}`)
   },
   createEntity: (packages, userId,OTP) => {    
     const entity={};

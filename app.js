@@ -72,7 +72,7 @@ app.use(function(err, req, res, next) {
     res.redirect("/error/403");
     return;
   }
-  res.render("/error/normalError", { message: err.message });
+  res.render("error/normalError", { message: err.message });
 });
 
 var server = app.listen(8000, function() {

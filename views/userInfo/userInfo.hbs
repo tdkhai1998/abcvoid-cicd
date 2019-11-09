@@ -51,34 +51,63 @@
                         <div class="visit">Change</div>
                         <div class="visit">Renew</div>
                     </div>
+                    {{#each listKey}}
                     <div class="table-row">
-                        <div class="serial">01</div>
-                        <div class="percentage">80b0ea81c5d811d0k763442e434ac2625</div>
-                        <div class="country" style="justify-content: center">Basic</div>
-                        <div class="country" style="justify-content: center">13/01/2001</div>
+
+                        <div class="serial">{{id}}</div>
+                        <div class="percentage"><input form="updateform" type="hidden" name="id" value={{value}}>{{value}}</div>
+                        <input form="renewkey" type="hidden" name="id" value={{value}}>
+                        <div class="country" style="justify-content: center">{{name}}</div>
+                        <div class="country" style="justify-content: center">{{date_expired}}</div>
 
                         <div class="visit">
-                            <form style="width:100%">
+                            <form id="updateform" method="POST" action='profile/updatekey'>
                                 <button style="justify-content: center"
-                                    class="genric-btn primary-border circle">Change</button>
+                                    class="genric-btn primary-border circle" type="submit">Change</button>
                             </form>
+
                         </div>
 
-
                         <div class="visit">
-                            <form style="width:100%">
+                            <form id="renewkey" method="POST" action="profile/renewkey" style="width:100%">
                                 <button style="justify-content: center"
-                                    class="genric-btn success-border circle">Renew</button>
+                                    class="genric-btn success-border circle" type="submit">Renew</button>
                             </form>
                         </div>
 
 
                     </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- breadcrumb start-->
+{{!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var frm = $('#updateform');
 
+    frm.submit(function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                document.location.reload(true);
+                alert(d);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });
+</script> --}}
 {{>footer}}

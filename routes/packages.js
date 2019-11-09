@@ -7,6 +7,7 @@ var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const user = "edogawaconanhuyx98@gmail.com";
 const password = "Cotroimoibiet12";
+let message = false;
 /* GET home page. */
 router.get("/", async function(req, res, next) {
   console.log(req.user);
@@ -15,8 +16,10 @@ router.get("/", async function(req, res, next) {
   res.render("packages/packages", {
     title: "Express",
     user: req.user,
-    listKey: listKey[0] === null ? listKey[1] : "error"
+    listKey: listKey[0] === null ? listKey[1] : "error",
+    message: message
   });
+  message = false;
 });
 const smtpTransport = nodemailer.createTransport({
   host: "gmail.com",
@@ -51,7 +54,7 @@ const sendOTPToMail = (req, res, email, OTP) => {
 };
 router.get("/buy/:id", async (req, res, next) => {
   const user = req.user;
-  const message = "Check email đeeeeeee";
+
   const idPackage = req.params.id;
   if (!user) {
     res.redirect("/login");
@@ -71,7 +74,8 @@ router.get("/buy/:id", async (req, res, next) => {
       if (isErr) {
         next(isErr);
       } else {
-        res.redirect("/");
+        message = "Code's sent to your email. Please check !";
+        res.redirect("/packages");
       }
     }
   }
