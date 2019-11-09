@@ -49,6 +49,7 @@ app.use("/demo", require("./routes/demo"));
 app.use("/abcvoiceapi", require("./routes/api/abcvoiceAPI"));
 app.use("/apidoc", require("./routes/apidocument"));
 app.use("/packages", require("./routes/packages"));
+app.use("/checkcode", require("./routes/checkcode/checkcode"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

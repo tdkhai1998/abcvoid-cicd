@@ -11,13 +11,12 @@
                         <h2 class="userInfo">User Information</h2>
                         <form method="POST">
                             <div class="formElement">
-                                <label style="float: left;" for="username">Your email</label>
+
                                 <input style="background-color: antiquewhite;" id="username" value="{{user.email}}"
                                     readonly type="text" placeholder="Name" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Email'" required class="single-input">
                             </div>
                             <div class="formElement">
-                                <label style="float: left;" for="username">Your name</label>
                                 <input id="username" name="name" value="{{user.name}}" type="text" placeholder="Name"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required
                                     class="single-input">
@@ -33,6 +32,46 @@
                             </div>
                             {{/if}}
                         </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="section-top-border">
+            <h3 class="mb-30">List of Keys</h3>
+            <a href="/checkcode" style="justify-content: end" class="genric-btn success-border radius">Add new key</a>
+            <div class="progress-table-wrap">
+                <div class="progress-table">
+                    <div class="table-head">
+                        <div class="serial">#</div>
+                        <div class="percentage">API Key</div>
+                        <div class="country">Package Type</div>
+                        <div class="country">Expired</div>
+                        <div class="visit">Change</div>
+                        <div class="visit">Renew</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="serial">01</div>
+                        <div class="percentage">80b0ea81c5d811d0k763442e434ac2625</div>
+                        <div class="country" style="justify-content: center">Basic</div>
+                        <div class="country" style="justify-content: center">13/01/2001</div>
+
+                        <div class="visit">
+                            <form style="width:100%">
+                                <button style="justify-content: center"
+                                    class="genric-btn primary-border circle">Change</button>
+                            </form>
+                        </div>
+
+
+                        <div class="visit">
+                            <form style="width:100%">
+                                <button style="justify-content: center"
+                                    class="genric-btn success-border circle">Renew</button>
+                            </form>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
