@@ -82,6 +82,31 @@ router.get("/buy/:id", async (req, res, next) => {
 });
 router.get("/verify", function(req, res, next) {
   console.log(req.user);
-  res.render("checkcode/checkcode");
+  const user = req.user;
+  if(!user)
+  {
+    return res.redirect("/login");  
+  }
+  
+  return res.render("checkcode/checkcode",{
+    title:"Verify OTP",
+    user
+  });
+  
+  
+});
+router.post("/verify", function(req, res, next) {
+  console.log(req.user);
+  const user = req.user;
+  if(!user)
+  {
+    return res.redirect("/login");  
+  }
+  
+  return res.render("checkcode/checkcode",{
+    user
+  });
+  
+  
 });
 module.exports = router;
