@@ -10,20 +10,18 @@ const moment = require('moment');
 router.get("/", async (req, res, next) => {
   const user = req.user;
   console.log(user);
-  const infoUser = await toFunction(userModel.findApiKeys(user.id));
   const listKey = await toFunction(apiKeyModel.getKeyById(user.id));
   listKey[1] = listKey[1].map(elem => {
     elem.date_expired =  moment(elem.date_expired).format('DD/MM/YYYY');
     return elem;
   });
-  if (infoUser[0] || listKey[0]) {
-    return next(infoUser[0]);
+  if (listKey[0]) {
+    return next(listKey[0]);
   }
   console.log('listKey----', listKey[1]);
   res.render("userInfo/userInfo", {
     user,
-    listKey: listKey[1],
-    packages: infoUser[1]
+    listKey: listKey[1]
   });
 });
 router.post("/updatekey", async (req,res,next) => {
