@@ -20,8 +20,8 @@ module.exports = {
   getKeyByTransactionId: transactionId => {
     return db.load(`select * from api_key where transactionId='${transactionId}'`);
   },
-  update: entity => {
-    db.update("api_key", "id", entity);
+  update: (fieldName, entity) => {
+    return db.update("api_key", fieldName, entity);
   },
   createEntity: (packages, userId,OTP) => {
     const entity={};

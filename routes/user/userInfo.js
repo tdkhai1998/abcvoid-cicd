@@ -25,14 +25,20 @@ router.get("/", async (req, res, next) => {
   });
 });
 router.post("/updatekey", async (req,res,next) => {
-  let key = await apiKeyModel.singleById(req.body.id);
+  console.log('idddddd', req.body.id);
+  let key = await apiKeyModel.searchKey(req.body.id);
+  console.log('key-------', key);
   key[0].value = genKey();
+  console.log('keyafterrr-------', key);
   await apiKeyModel.update('id', key[0]);
-  res.redirect("/profile");
+  res.send("/profile");
 });
 router.post("/renewkey", async (req, res, next) => {
+  console.log('reqbody--', req.body);
   let key = await apiKeyModel.singleById(req.body.idKey);
-  let packageInfo = await packageModel.singleById(req.body.id_package);
+  let packageInfo = await packageModel.singleById(req.body.idPackage);
+  console.log('packgasdsad', packageInfo);
+  console.log('key------', key);
   key[0].date_expired = moment(key[0].date_expired).add(packageInfo[0].term, 'days').format('YYYY-MM-DD');
   await apiKeyModel.update('id',key[0]);
   res.redirect("/profile");

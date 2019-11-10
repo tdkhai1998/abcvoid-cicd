@@ -57,7 +57,7 @@
                         <div class="serial">{{id}}</div>
                         <div class="percentage"><input form="updateform" type="hidden" name="id" value={{value}}>{{value}}</div>
                         <input form="renewkey" type="hidden" name="idPackage" value={{id_package}}>
-                        <input form="renewkey" type="hidden" name="idKey" value={{value}}>
+                        <input form="renewkey" type="hidden" name="idKey" value={{id}}>
 
                         <div class="country" style="justify-content: center">{{name_package}}</div>
                         <div class="country" style="justify-content: center">{{date_expired}}</div>
@@ -86,7 +86,7 @@
     </div>
 </section>
 <!-- breadcrumb start-->
-{{!-- <script
+<script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
@@ -111,5 +111,5 @@
             },
         });
     });
-</script> --}}
+</script>
 {{>footer}}
