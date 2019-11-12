@@ -3,8 +3,7 @@ var router = express.Router();
 var userModel = require("../../model/user.model");
 var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const user = "edogawaconanhuyx98@gmail.com";
-const password = "Cotroimoibiet12";
+const account = require("../../const/emailAccount");
 /* GET emailForgot page. */
 router.get("/", function(req, res, next) {
   res.render("passwordforgot/passwordForgot", { title: "Email Forgot" });
@@ -30,8 +29,8 @@ const smtpTransport = nodemailer.createTransport({
   host: "gmail.com",
   service: "Gmail",
   auth: {
-    user: user,
-    pass: password
+    user: account.GMAIL,
+    pass: account.GMAIL_PASSWORD
   }
 });
 const sendmailRecover = async (req, res, email) => {

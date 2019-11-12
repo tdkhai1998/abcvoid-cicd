@@ -5,8 +5,7 @@ var keyModel = require("../model/key.model");
 var toFunc = require("../util/toFunction");
 var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const user = "edogawaconanhuyx98@gmail.com";
-const password = "Cotroimoibiet12";
+const account = require("../const/emailAccount");
 let message = false;
 /* GET home page. */
 router.get("/", async function(req, res, next) {
@@ -25,8 +24,8 @@ const smtpTransport = nodemailer.createTransport({
   host: "gmail.com",
   service: "Gmail",
   auth: {
-    user: user,
-    pass: password
+    user: account.GMAIL,
+    pass: account.GMAIL_PASSWORD
   }
 });
 const sendOTPToMail = (req, res, email, OTP) => {
