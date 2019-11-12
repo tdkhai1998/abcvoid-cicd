@@ -4,9 +4,11 @@ var userModel = require("../../model/user.model");
 var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const account = require("../../const/emailAccount");
+let message = false;
 /* GET emailForgot page. */
 router.get("/", function(req, res, next) {
-  res.render("passwordforgot/passwordForgot", { title: "Email Forgot" });
+  res.render("passwordforgot/passwordForgot", { title: "Email Forgot",message: message });
+  message = false;
 });
 
 /* GET email requst notification page. */
@@ -61,7 +63,7 @@ router.post("/", async (req, res, next) => {
   const email = req.body.email;
   let token = "";
   let notify = "CHÚNG TÔI RẤT TIẾC !!!";
-  let message =
+  message =
     "Có vẻ như tài khoản của bạn không tồn tại, hoặc chưa được kíck hoạt với bất cứ email nào :( !!!";
   let user = null;
   try {
@@ -83,7 +85,7 @@ router.post("/", async (req, res, next) => {
       .then(r => res.redirect("forgotPassword/nortificationRequest"))
       .catch(e => next(e));
   } else {
-    res.send(message);
+    res.redirect("/forgotPassword");
   }
 });
 module.exports = router;
