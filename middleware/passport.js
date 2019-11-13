@@ -11,7 +11,7 @@ const createEntity = (profile, username) => {
   entity.email = username;
   entity.password = 0;
   entity.role = "user";
-  entity.name= profile.displayName;
+  entity.name = profile.displayName;
   return entity;
 };
 var localStrategy = new LocalStrategy(
@@ -66,11 +66,11 @@ const googleStrategy = new GoogleStrategy(
                   return done(null, user);
                 })
                 .catch(err => {
-                  next(err);
+                  done(err, null);
                 });
             })
             .catch(err => {
-              next(err);
+              done(err, null);
             });
         } else {
           userModel
@@ -80,12 +80,12 @@ const googleStrategy = new GoogleStrategy(
               return done(null, user);
             })
             .catch(err => {
-              next(err);
+              done(err, null);
             });
         }
       })
       .catch(err => {
-        next(err);
+        done(err, null);
       });
   }
 );
@@ -112,11 +112,11 @@ const facebookStrategy = new FacebookStrategy(
                   return done(null, user);
                 })
                 .catch(err => {
-                  next(err);
+                  done(e, null);
                 });
             })
             .catch(err => {
-              next(err);
+              done(err, null);
             });
         } else {
           userModel
@@ -126,12 +126,12 @@ const facebookStrategy = new FacebookStrategy(
               return done(null, user);
             })
             .catch(err => {
-              next(err);
+              done(err, null);
             });
         }
       })
       .catch(err => {
-        next(err);
+        done(err, null);
       });
   }
 );
