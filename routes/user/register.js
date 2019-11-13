@@ -20,7 +20,7 @@ router.post("/", async (req, res, next) => {
     if (email_user.length > 0) {
       return res.render("register/register", {
         title: "Đăng ký",
-        message: "Missing parameters"
+        message: "Username existed"
       });
     } else {
       const data = {
@@ -49,17 +49,6 @@ router.post("/", async (req, res, next) => {
       title: "Đăng ký",
       message: "Missing parameters"
     });
-
-    // res.render("/admin/packages",
-    //   message,  // thông báo
-    //   listPackages,  // các packages hiện có của hệ thống
-    //   user // là tên của tài khoản admin
-    //  )
-
-    //  res.render("/admin/statistics",
-    //   chartYear,// [ ]: mảng doanh thu 12 tháng của năm đó
-    //   chartMonthYear // [{name: <tên gói>, amount: <doanh thu gói>}]: mảng doanh thu của tất cả các gói
-    //  )
   }
 });
 
