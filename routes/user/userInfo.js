@@ -46,10 +46,13 @@ router.post("/renewkey", async (req, res, next) => {
   res.redirect("/profile");
 });
 router.post("/", async (req, res, next) => {
-  const user = req.user;
+  const user = req.body.user;
   const name = req.body.name;
+  console.log(`-req ${req.body}`);
+
   if (name) {
     user.name = name;
+    console.log(user);
     userModel.update(user);
   }
   res.redirect("/profile");

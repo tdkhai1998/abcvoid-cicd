@@ -11,8 +11,8 @@ module.exports = {
   singleById: id => {
     return db.load(`select * from api_key where id='${id}'`);
   },
-  update: (idField, entity) => {
-    return db.update("api_key", idField, entity);
+  update: entity => {
+    return db.update("api_key", "id", entity);
   },
   getKeyById: id => {
     return db.load(`select * from api_key where user_id='${id}' and valid = 1`);
