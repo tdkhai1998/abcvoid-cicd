@@ -8,11 +8,11 @@ let FacebookStrategy = require("passport-facebook").Strategy;
 let keyModel = require("../model/key.model");
 
 const createEntity = (profile, username) => {
-  let entity = new Object();
+  let entity = {};
   entity.email = username;
-  entity.password = 0;
+  entity.password = null;
   entity.role = "user";
-  entity.name = profile.displayName;
+  entity.name = profile.displayName || "NoName";
   return entity;
 };
 const localStrategy = new LocalStrategy(
@@ -45,47 +45,44 @@ const googleStrategy = new GoogleStrategy(
     clientSecret: configAuth.googleAuth.clientSecret,
     callbackURL: configAuth.googleAuth.callbackURL
   },
-  function(accessToken, refreshToken, profile, done) {
-    let username = "gg-" + profile.id;
-    console.log(profile);
-    userModel
-      .findByEmail(username)
-      .then(rows => {
-        if (rows.length == 0) {
-          const newUser = createEntity(profile, username);
-          userModel
-            .add(newUser)
-            .then(info => {
-              keyModel.add(keyModel.createFreeKey(info.insertId));
-              done(null, newUser);
-            })
-            .catch(err => {
-              done(err, null);
-            });
-        } else {
-          done(null, rows[0]);
+  async (_accessToken, _refreshToken, profile, done) => {
+    try {
+      let username = profile.emails[0].value;
+      const rows = await userModel.findByEmail(username);
+      if (rows.length == 0) {
+        const newUser = createEntity(profile, username);
+        try {
+          const info = await userModel.add(newUser);
+          newUser.id = info.insertId;
+          keyModel.add(keyModel.createFreeKey(info.insertId));
+          done(null, newUser);
+        } catch (err) {
+          done(err, null);
         }
-      })
-      .catch(err => {
-        done(err, null);
-      });
+      } else done(null, rows[0]);
+    } catch (err_1) {
+      done(err_1, null);
+    }
   }
 );
 const facebookStrategy = new FacebookStrategy(
   {
     clientID: configAuth.facebookAuth.clientID,
     clientSecret: configAuth.facebookAuth.clientSecret,
-    callbackURL: configAuth.facebookAuth.callbackURL
+    callbackURL: configAuth.facebookAuth.callbackURL,
+    profileFields: ["emails", "displayName"]
   },
-  async (accessToken, refreshToken, profile, done) => {
-    let username = "fb-" + profile.id;
-    console.log(profile);
+  async (_accessToken, _refreshToken, profile, done) => {
     try {
+      console.log(profile);
+
+      const username = profile.emails[0].value;
       const rows = await userModel.findByEmail(username);
       if (rows.length == 0) {
         const newUser = createEntity(profile, username);
         try {
           const info = await userModel.add(newUser);
+          newUser.id = info.insertId;
           keyModel.add(keyModel.createFreeKey(info.insertId));
           done(null, newUser);
         } catch (err) {
