@@ -9,15 +9,13 @@ module.exports = {
     return db.load(`select * from api_key where value='${id}'`);
   },
   singleById: id => {
-    return db.load(`select * from api_key where value='${id}'`);
+    return db.load(`select * from api_key where id='${id}'`);
   },
   update: (idField, entity) => {
     return db.update("api_key", idField, entity);
   },
   getKeyById: id => {
-    return db.load(
-      `select * from api_key INNER JOIN KeyPackages  on api_key.id_package=KeyPackages.id and user_id=${id} and api_key.valid = 1`
-    );
+    return db.load(`select * from api_key where user_id='${id}' and valid = 1`);
   },
   createEntity: (packages, userId, OTP) => {
     const entity = {};
