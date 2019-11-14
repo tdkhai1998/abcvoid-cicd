@@ -1,21 +1,21 @@
-var passport = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
-var bcrypt = require("bcrypt");
-var userModel = require("../model/user.model");
-var configAuth = require("../config/auth");
-var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-var FacebookStrategy = require("passport-facebook").Strategy;
-var keyModel = require("../model/key.model");
+let passport = require("passport");
+let LocalStrategy = require("passport-local").Strategy;
+let bcrypt = require("bcrypt");
+let userModel = require("../model/user.model");
+let configAuth = require("../config/auth");
+let GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+let FacebookStrategy = require("passport-facebook").Strategy;
+let keyModel = require("../model/key.model");
 
 const createEntity = (profile, username) => {
-  var entity = new Object();
+  let entity = new Object();
   entity.email = username;
   entity.password = 0;
   entity.role = "user";
   entity.name = profile.displayName;
   return entity;
 };
-var localStrategy = new LocalStrategy(
+const localStrategy = new LocalStrategy(
   {
     usernameField: "email",
     passwordField: "password"
@@ -24,19 +24,17 @@ var localStrategy = new LocalStrategy(
     userModel
       .findByEmail(username)
       .then(rows => {
-        console.log(rows);
         if (rows.length === 0) {
-          return done(null, false, { message: "Invalid username." });
+          done(null, false, { message: "Invalid username." });
+          return;
         }
-        var user = rows[0];
-        var ret = bcrypt.compareSync(password, user.password);
-        if (ret) {
-          return done(null, user);
-        }
-        return done(null, false, { message: "Invalid password." });
+        let user = rows[0];
+        let ret = bcrypt.compareSync(password, user.password);
+        if (ret) done(null, user);
+        else done(null, false, { message: "Invalid password." });
       })
       .catch(err => {
-        return done(err, false);
+        done(err, false);
       });
   }
 );
@@ -48,16 +46,17 @@ const googleStrategy = new GoogleStrategy(
     callbackURL: configAuth.googleAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-    var username = "gg-" + profile.id;
+    let username = "gg-" + profile.id;
     userModel
       .findByEmail(username)
       .then(rows => {
         if (rows.length == 0) {
-          var newUser = createEntity(profile, username);
+          const newUser = createEntity(profile, username);
           userModel
             .add(newUser)
-            .then(() => {
-              return done(null, newUser);
+            .then(info => {
+              keyModel.add(keyModel.createFreeKey(info.insertId));
+              done(null, newUser);
             })
             .catch(err => {
               done(err, null);
@@ -78,7 +77,7 @@ const facebookStrategy = new FacebookStrategy(
     callbackURL: configAuth.facebookAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-    var username = "fb-" + profile.id;
+    let username = "fb-" + profile.id;
     userModel
       .findByEmail(username)
       .then(rows => {

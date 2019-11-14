@@ -5,42 +5,42 @@ const apiKeyModel = require("../../model/key.model");
 const packageModel = require("../../model/packageKey.model");
 const toFunction = require("../../util/toFunction");
 const genKey = require("../../function/genarateKey");
-const moment = require('moment');
+const moment = require("moment");
 /* GET users listing. */
 router.get("/", async (req, res, next) => {
   const user = req.user;
-  console.log(user);
   const listKey = await toFunction(apiKeyModel.getKeyById(user.id));
   listKey[1] = listKey[1].map(elem => {
-    elem.date_expired =  moment(elem.date_expired).format('DD/MM/YYYY');
+    elem.date_expired = moment(elem.date_expired).format("DD/MM/YYYY");
     return elem;
   });
   if (listKey[0]) {
     return next(listKey[0]);
   }
-  console.log('listKey----', listKey[1]);
   res.render("userInfo/userInfo", {
     user,
     listKey: listKey[1]
   });
 });
-router.post("/updatekey", async (req,res,next) => {
-  console.log('idddddd', req.body.id);
+router.post("/updatekey", async (req, res, next) => {
+  console.log("idddddd", req.body.id);
   let key = await apiKeyModel.searchKey(req.body.id);
-  console.log('key-------', key);
+  console.log("key-------", key);
   key[0].value = genKey();
-  console.log('keyafterrr-------', key);
-  await apiKeyModel.update('id', key[0]);
+  console.log("keyafterrr-------", key);
+  await apiKeyModel.update("id", key[0]);
   res.redirect("/profile");
 });
 router.post("/renewkey", async (req, res, next) => {
-  console.log('reqbody--', req.body);
+  console.log("reqbody--", req.body);
   let key = await apiKeyModel.singleById(req.body.idKey);
   let packageInfo = await packageModel.singleById(req.body.idPackage);
-  console.log('packgasdsad', packageInfo);
-  console.log('key------', key);
-  key[0].date_expired = moment(key[0].date_expired).add(packageInfo[0].term, 'days').format('YYYY-MM-DD');
-  await apiKeyModel.update('id',key[0]);
+  console.log("packgasdsad", packageInfo);
+  console.log("key------", key);
+  key[0].date_expired = moment(key[0].date_expired)
+    .add(packageInfo[0].term, "days")
+    .format("YYYY-MM-DD");
+  await apiKeyModel.update("id", key[0]);
   res.redirect("/profile");
 });
 router.post("/", async (req, res, next) => {
