@@ -16,7 +16,7 @@ module.exports = {
   },
   getKeyById: id => {
     return db.load(
-      `select * from api_key INNER JOIN KeyPackages  on api_key.id_package=KeyPackages.id and user_id=${id}`
+      `select * from api_key INNER JOIN KeyPackages  on api_key.id_package=KeyPackages.id and user_id=${id} and api_key.valid = 1`
     );
   },
   createEntity: (packages, userId, OTP) => {
@@ -49,5 +49,10 @@ module.exports = {
     entity.name_package = null;
     entity.transactionId = null;
     return entity;
+  },
+  getKeyByTransactionId: transactionId => {
+    return db.load(
+      `select * from api_key where transactionId='${transactionId}'`
+    );
   }
 };

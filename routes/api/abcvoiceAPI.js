@@ -11,6 +11,7 @@ const multer = require("multer");
 var storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
+  console.log(file);
   if (file.mimetype === "audio/wav") {
     cb(null, true);
   } else {
