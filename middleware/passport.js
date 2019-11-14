@@ -5,6 +5,7 @@ var userModel = require("../model/user.model");
 var configAuth = require("../config/auth");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 var FacebookStrategy = require("passport-facebook").Strategy;
+var keyModel = require("../model/key.model");
 
 const createEntity = (profile, username) => {
   var entity = new Object();
@@ -27,13 +28,11 @@ var localStrategy = new LocalStrategy(
         if (rows.length === 0) {
           return done(null, false, { message: "Invalid username." });
         }
-
         var user = rows[0];
-        var ret = bcrypt.compareSync(password, rows[0].password);
+        var ret = bcrypt.compareSync(password, user.password);
         if (ret) {
           return done(null, user);
         }
-
         return done(null, false, { message: "Invalid password." });
       })
       .catch(err => {
@@ -50,38 +49,21 @@ const googleStrategy = new GoogleStrategy(
   },
   function(accessToken, refreshToken, profile, done) {
     var username = "gg-" + profile.id;
-
     userModel
       .findByEmail(username)
       .then(rows => {
         if (rows.length == 0) {
-          var entity = createEntity(profile, username);
+          var newUser = createEntity(profile, username);
           userModel
-            .add(entity)
-            .then(n => {
-              userModel
-                .findByEmail(username)
-                .then(rows1 => {
-                  var user = rows1[0];
-                  return done(null, user);
-                })
-                .catch(err => {
-                  done(err, null);
-                });
+            .add(newUser)
+            .then(() => {
+              return done(null, newUser);
             })
             .catch(err => {
               done(err, null);
             });
         } else {
-          userModel
-            .findByEmail(username)
-            .then(rows1 => {
-              var user = rows1[0];
-              return done(null, user);
-            })
-            .catch(err => {
-              done(err, null);
-            });
+          done(null, rows[0]);
         }
       })
       .catch(err => {
@@ -101,33 +83,17 @@ const facebookStrategy = new FacebookStrategy(
       .findByEmail(username)
       .then(rows => {
         if (rows.length == 0) {
-          var entity = createEntity(profile, username);
+          const newUser = createEntity(profile, username);
           userModel
-            .add(entity)
-            .then(n => {
-              userModel
-                .findByEmail(username)
-                .then(rows1 => {
-                  var user = rows1[0];
-                  return done(null, user);
-                })
-                .catch(err => {
-                  done(e, null);
-                });
+            .add(newUser)
+            .then(() => {
+              done(null, newUser);
             })
             .catch(err => {
               done(err, null);
             });
         } else {
-          userModel
-            .findByEmail(username)
-            .then(rows1 => {
-              var user = rows1[0];
-              return done(null, user);
-            })
-            .catch(err => {
-              done(err, null);
-            });
+          done(null, rows[0]);
         }
       })
       .catch(err => {
@@ -141,7 +107,6 @@ module.exports = function(app) {
   passport.use(localStrategy);
   passport.use(googleStrategy);
   passport.use(facebookStrategy);
-
   passport.serializeUser((user, done) => {
     return done(null, user);
   });
