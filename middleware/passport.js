@@ -47,6 +47,7 @@ const googleStrategy = new GoogleStrategy(
   },
   function(accessToken, refreshToken, profile, done) {
     let username = "gg-" + profile.id;
+    console.log(profile);
     userModel
       .findByEmail(username)
       .then(rows => {
@@ -76,28 +77,24 @@ const facebookStrategy = new FacebookStrategy(
     clientSecret: configAuth.facebookAuth.clientSecret,
     callbackURL: configAuth.facebookAuth.callbackURL
   },
-  function(accessToken, refreshToken, profile, done) {
+  async (accessToken, refreshToken, profile, done) => {
     let username = "fb-" + profile.id;
-    userModel
-      .findByEmail(username)
-      .then(rows => {
-        if (rows.length == 0) {
-          const newUser = createEntity(profile, username);
-          userModel
-            .add(newUser)
-            .then(() => {
-              done(null, newUser);
-            })
-            .catch(err => {
-              done(err, null);
-            });
-        } else {
-          done(null, rows[0]);
+    console.log(profile);
+    try {
+      const rows = await userModel.findByEmail(username);
+      if (rows.length == 0) {
+        const newUser = createEntity(profile, username);
+        try {
+          const info = await userModel.add(newUser);
+          keyModel.add(keyModel.createFreeKey(info.insertId));
+          done(null, newUser);
+        } catch (err) {
+          done(err, null);
         }
-      })
-      .catch(err => {
-        done(err, null);
-      });
+      } else done(null, rows[0]);
+    } catch (err_1) {
+      done(err_1, null);
+    }
   }
 );
 module.exports = function(app) {

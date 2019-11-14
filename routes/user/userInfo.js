@@ -10,13 +10,15 @@ const moment = require("moment");
 router.get("/", async (req, res, next) => {
   const user = req.user;
   const listKey = await toFunction(apiKeyModel.getKeyById(user.id));
+  if (listKey[0]) {
+    return next(listKey[0]);
+  }
   listKey[1] = listKey[1].map(elem => {
     elem.date_expired = moment(elem.date_expired).format("DD/MM/YYYY");
     return elem;
   });
-  if (listKey[0]) {
-    return next(listKey[0]);
-  }
+  console.log("xdcfvgbhn", listKey[1]);
+
   res.render("userInfo/userInfo", {
     user,
     listKey: listKey[1]

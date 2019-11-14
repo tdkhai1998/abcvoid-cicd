@@ -73,7 +73,7 @@ router.get("/buy/:id", async (req, res, next) => {
       if (isErr) {
         next(isErr);
       } else {
-        message = "Code's sent to your email. Please check !";
+        message = `Code's sent to your email ${user.email} . Please check !`;
         res.redirect("/packages");
       }
     }
@@ -107,8 +107,7 @@ router.post("/verify", async (req, res, next) => {
   } else {
     if (api_key[1].length === 0) {
       message = "OTP code is invalid please try again :( !";
-      console.log("messs---",message);
-      
+      console.log("messs---", message);
     } else {
       console.log("valid---", api_key[1][0]);
       api_key[1][0].valid = true;
@@ -117,9 +116,9 @@ router.post("/verify", async (req, res, next) => {
       // if (result[0]) {
       //   next(result[0]);
       // } else {
-        keyModel.update(api_key[1][0])
-        message = "Your key is activated successfully !!!"
-        //res.redirect("/");
+      keyModel.update(api_key[1][0]);
+      message = "Your key is activated successfully !!!";
+      //res.redirect("/");
       //}
     }
     res.redirect("/packages/verify");
