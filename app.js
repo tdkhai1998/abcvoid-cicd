@@ -36,7 +36,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //routes
-
 require("./routes")(app);
 
 // catch 404 and forward to error handler
@@ -61,11 +60,5 @@ app.use(function(err, req, res, next) {
     return;
   }
   res.render("error/normalError", { message: err });
-});
-
-var server = app.listen(8000, function() {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log("ABCVoice dang hoat dong tai dia chi: http://%s:%s", host, port);
 });
 module.exports = app;
