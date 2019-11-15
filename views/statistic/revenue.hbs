@@ -26,6 +26,14 @@
                 <div class="section_tittle text-center">
                     <h2>REVENUE BY YEAR</h2>
                     <div class="chart" style="position: relative; height:200px; margin-bottom:100px">
+                        <div class="single-element-widget mt-30">
+
+                            <div class="default-select" id="default-select_2" style="display:flex">
+                                <select class="yearOptions" id="revenueByYear-YearOptions"></select>
+                                <button class="getRevenueByYearBtn genric-btn success-border"><a
+                                        class="getRevenueByYearLink">GET</a></button>
+                            </div>
+                        </div>
                         <canvas id="revenueByYear"></canvas>
                         <script>
                             //đổ data ở đây !
@@ -63,8 +71,19 @@
                         </script>
                     </div>
 
-                    <h2>REVENUE BY MONTH</h2>
+                    <h2>REVENUE BY MONTH </h2>
                     <div class="chart" style="position: relative; height:200px;">
+                        <div class="single-element-widget mt-30">
+
+                            <div class="default-select" id="default-select_2" style="display:flex">
+                                <select class="yearOptions" id="revenueByMonth-YearOptions"></select>
+                                <select class="monthOptions" id="revenueByMonth-MonthOptions"></select>
+                                <button class="getRevenueByMonthBtn genric-btn success-border"><a
+                                        class="getRevenueByMonthLink">GET</a></button>
+                            </div>
+
+                        </div>
+
                         <canvas id="revenueByMonth"></canvas>
                         <script>
                             //đổ data ở đây !
