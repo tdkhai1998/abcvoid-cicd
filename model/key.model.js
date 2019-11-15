@@ -16,7 +16,7 @@ module.exports = {
   },
   getKeyById: id => {
     return db.load(
-      `select * from api_key where user_id=${id}`
+      `select * from api_key where user_id='${id}'`
     );
   },
   createEntity: (packages, userId, OTP) => {

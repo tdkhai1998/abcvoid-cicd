@@ -8,6 +8,12 @@ exports.uploadSingleFile = async (req, res, next) => {
   const url = "https://server-sound-api.herokuapp.com";
   let jsonData = "";
   const file = req.file;
+  console.log('file in request---', file);
+  if (file.mimetype !== "audio/wav") {
+    const error = new Error("Chỉ chấp nhận file .wav");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
   if (!file) {
     const error = new Error("Please upload a file");
     error.httpStatusCode = 400;

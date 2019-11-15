@@ -10,11 +10,11 @@ var storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
   console.log(file);
-  if (file.mimetype === "audio/wav") {
+  // if (file.mimetype === "audio/wav") {
     cb(null, true);
-  } else {
-    cb(new Error("Chỉ chấp nhận file .wav"), false);
-  }
+  // } else {
+  //   cb(new Error("Chỉ chấp nhận file .wav"), false);
+  // }
 };
 var upload = multer({
   storage: storage,

@@ -11,11 +11,11 @@ const multer = require("multer");
 var storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === "audio/wav") {
+  // if (file.mimetype === "audio/wav") {
     cb(null, true);
-  } else {
-    cb(new Error("Chỉ chấp nhận file .wav"), false);
-  }
+  // } else {
+  //   cb(new Error("Chỉ chấp nhận file .wav"), false);
+  // }
 };
 var upload = multer({
   storage: storage,
@@ -28,6 +28,12 @@ router.post("/", upload.single("myFile"), async (req, res, next) => {
   const url = "https://server-sound-api.herokuapp.com";
   let jsonData = "";
   const file = req.file;
+  console.log('file in request---', file);
+  if (file.mimetype !== "audio/wav") {
+    const error = new Error("Chỉ chấp nhận file .wav");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
   const apiKey = req.body.apiKey;
   const rows = await keyModel.searchKey(apiKey);
   if (rows.length === 0 || rows[0].valid === 0) {
