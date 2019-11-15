@@ -1,0 +1,94 @@
+{{>adminHeader user=this.user}}
+<!-- banner part start-->
+{{>adminHeader user=this.user}}
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2 class="api-title">USER MANAGEMENT</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+<!--================Blog Area =================-->
+<!-- use sasu part end-->
+<section class="use_sasu">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>USER BOARD</h2>
+                    <div class="progress-table-wrap">
+                        <div class="progress-table">
+                            <div class="table-head">
+                                <div class="serial">#</div>
+                                <div class="visit">User ID</div>
+                                <div class="visit">Name</div>
+                                <div class="country">Email</div>
+                                <div class="visit">Detail</div>
+
+                            </div>
+
+                            <div class="table-row">
+                                {{!-- đổ data ở đây --}}
+                                <div class="serial" style="justify-content: center">1</div>
+                                <div class="visit" style="justify-content: center"><input form="updateform"
+                                        type="hidden" name="id">huydeptrai
+                                </div>
+                                <div class="visit" style="justify-content: center"><input form="updateform"
+                                        type="hidden" name="id">huydeptrai
+                                </div>
+                                <div class="country" style="justify-content: center">wedday2004x@gmail.com</div>
+                                <div class="visit">
+                                    <form id="updateform" method="POST" action='profile/updatekey' style="width:100%">
+                                        <button style="justify-content: center" class="genric-btn primary-border circle"
+                                            type="submit"><a href="/admin/userdetail">Detail</a></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row justify-content-center">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_1.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_2.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_3.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+{{>footer}}

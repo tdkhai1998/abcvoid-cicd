@@ -1,0 +1,118 @@
+{{>adminHeader user=this.user}}
+<!-- banner part start-->
+{{>adminHeader user=this.user}}
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2 class="api-title">ADMIN MANAGEMENT</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+<!--================Blog Area =================-->
+<!-- use sasu part end-->
+<section class="use_sasu">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="single-element-widget mt-30">
+                <h3 class="mb-30">Selectboxes</h3>
+                <div class="default-select" id="default-select_2">
+                    <select>
+                        <option value=" 1">English</option>
+                        <option value="1">Spanish</option>
+                        <option value="1">Arabic</option>
+                        <option value="1">Portuguise</option>
+                        <option value="1">Bengali</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="section_tittle text-center">
+
+
+
+                </div>
+                <div class="chart" style="position: relative; height:200px;">
+
+                    <canvas id="accessNumberChart"></canvas>
+                    <script>
+                        //đổ data ở đây !
+                        let data = [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3];
+                        var ctx = document.getElementById("accessNumberChart");
+                        var accessNumberChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                                datasets: [{
+                                    label: 'VND',
+                                    data: data,
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(153, 102, 255, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 2
+                                }]
+                            },
+
+                        });
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row justify-content-center">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_1.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_2.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_3.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+    </div>
+
+</section>
+<!--================Blog Area =================-->
+
+{{>footer}}

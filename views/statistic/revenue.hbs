@@ -1,0 +1,141 @@
+{{>adminHeader user=this.user}}
+<!-- banner part start-->
+{{>adminHeader user=this.user}}
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2 class="api-title">ADMIN MANAGEMENT</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+<!--================Blog Area =================-->
+<!-- use sasu part end-->
+<section class="use_sasu">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section_tittle text-center">
+                    <h2>REVENUE BY YEAR</h2>
+                    <div class="chart" style="position: relative; height:200px; margin-bottom:100px">
+                        <canvas id="revenueByYear"></canvas>
+                        <script>
+                            //đổ data ở đây !
+                            let revenueData1 = [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3];
+
+                            var ctx = document.getElementById("revenueByYear");
+                            var revenueByYearChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                                    datasets: [{
+                                        label: 'VND',
+                                        data: revenueData1,
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 2
+                                    }]
+                                },
+
+                            });
+                        </script>
+                    </div>
+
+                    <h2>REVENUE BY MONTH</h2>
+                    <div class="chart" style="position: relative; height:200px;">
+                        <canvas id="revenueByMonth"></canvas>
+                        <script>
+                            //đổ data ở đây !
+                            let package = ["Month Basic", "Month Advance", "Year Basic", "Year Advance"]
+                            let revenueData2 = [12222, 12229, 30000, 50000];
+                            var ctxx = document.getElementById("revenueByMonth");
+                            var revenueByMonthChart = new Chart(ctxx, {
+                                type: 'bar',
+                                data: {
+                                    labels: package,
+                                    datasets: [{
+                                        label: "",
+                                        data: revenueData2,
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 2
+                                    }]
+                                },
+
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row justify-content-center">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_1.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_2.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single_feature">
+                            <div class="single_feature_part">
+                                <img src="img/icon/feature_icon_3.png" alt="">
+                                <h4>A Volunteer</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+    </div>
+
+</section>
+<!--================Blog Area =================-->
+
+{{>footer}}
