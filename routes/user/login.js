@@ -30,7 +30,7 @@ router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    if (req.user && !req.user.passport) {
+    if (req.user && !req.user.password) {
       res.redirect("/forgotPassword/newPassword");
     } else res.redirect("/");
   }
@@ -46,7 +46,7 @@ router.get(
     failureRedirect: "/login"
   }),
   (req, res) => {
-    if (req.user && !req.user.passport) {
+    if (req.user && !req.user.password) {
       res.redirect("/forgotPassword/newPassword");
     } else res.redirect("/");
   }

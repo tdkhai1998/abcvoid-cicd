@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var app = express();
+var auth = require("./middleware/auth");
 
 require("./middleware/session")(app);
 require("./middleware/passport")(app);
@@ -24,7 +25,7 @@ app.engine(
   })
 );
 
-// view engine setup
+// view engine setupsjdbsd
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
@@ -35,15 +36,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+var user = require("./routes/user");
 //routes
-app.use("/", require("./routes/index"));
-app.use("/profile", require("./routes/user/userInfo"));
-app.use("/login", require("./routes/user/login"));
-app.use("/forgotPassword", require("./routes/user/passwordForgot.js"));
-app.use("/logout", require("./routes/user/logout"));
-app.use("/register", require("./routes/user/register"));
-app.use("/recoverPassword", require("./routes/user/recoverPassword"));
-app.use("/verify", require("./routes/user/verifyEmail"));
+app.use("/", require("./routes/home"));
+
+app.use("/profile", auth.user, user.profile);
+app.use("/login", auth.guest, user.login); //đăng nhập rồi thì không cho vô login nữa kkk
+app.use("/forgotPassword", user.forgotPass);
+app.use("/logout", auth.user, user.logout);
+app.use("/register", auth.user, user.register);
+app.use("/recoverPassword", auth.user, user.changePass);
 
 app.use("/demo", require("./routes/demo"));
 app.use("/abcvoiceapi", require("./routes/api/abcvoiceAPI"));
@@ -73,7 +75,7 @@ app.use(function(err, req, res, next) {
     res.redirect("/error/403");
     return;
   }
-  res.render("error/normalError", { message: err.message });
+  res.render("error/normalError", { message: err });
 });
 
 var server = app.listen(8000, function() {
