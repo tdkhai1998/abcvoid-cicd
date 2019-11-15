@@ -2,6 +2,7 @@
 <!-- banner part start-->
 {{>adminHeader user=this.user}}
 <!-- breadcrumb start-->
+
 <section class="breadcrumb breadcrumb_bg">
     <div class="container">
         <div class="row">
@@ -22,26 +23,19 @@
 <section class="use_sasu">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="single-element-widget mt-30">
-                <h3 class="mb-30">Selectboxes</h3>
-                <div class="default-select" id="default-select_2">
-                    <select>
-                        <option value=" 1">English</option>
-                        <option value="1">Spanish</option>
-                        <option value="1">Arabic</option>
-                        <option value="1">Portuguise</option>
-                        <option value="1">Bengali</option>
-                    </select>
-                </div>
-            </div>
+
             <div class="col-lg-8">
-                <div class="section_tittle text-center">
 
-
-
-                </div>
                 <div class="chart" style="position: relative; height:200px;">
+                    <div class="single-element-widget mt-30">
 
+                        <div class="default-select" id="default-select_2" style="display:flex">
+                            <select class="yearOptions"></select>
+                            <button class="getAccessNumberBtn genric-btn success-border"><a
+                                    class="getAccessNumberLink">GET</a></button>
+                        </div>
+
+                    </div>
                     <canvas id="accessNumberChart"></canvas>
                     <script>
                         //đổ data ở đây !
