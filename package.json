@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "lint": "eslint lib spec",
+    "precommit": "npm test",
+    "prepush": "./bin/pre-push-check.sh"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -23,6 +26,7 @@
     "hat": "0.0.3",
     "html-minifier": "^4.0.0",
     "http-errors": "~1.6.3",
+    "husky": "^3.0.9",
     "mdbootstrap": "^4.8.10",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
