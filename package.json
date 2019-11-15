@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "lint": "eslint lib spec",
-    "precommit": "npm test",
-    "prepush": "./bin/pre-push-check.sh"
+    "start": "nodemon ./bin/www"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
