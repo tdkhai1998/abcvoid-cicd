@@ -11,13 +11,11 @@ module.exports = {
   singleById: id => {
     return db.load(`select * from api_key where id='${id}'`);
   },
-  update: (idField, entity) => {
-    return db.update("api_key", idField, entity);
+  update: entity => {
+    return db.update("api_key", "id", entity);
   },
   getKeyById: id => {
-    return db.load(
-      `select * from api_key where user_id='${id}'`
-    );
+    return db.load(`select * from api_key where user_id='${id}' and valid = 1`);
   },
   createEntity: (packages, userId, OTP) => {
     const entity = {};
@@ -49,5 +47,10 @@ module.exports = {
     entity.name_package = null;
     entity.transactionId = null;
     return entity;
+  },
+  getKeyByTransactionId: transactionId => {
+    return db.load(
+      `select * from api_key where transactionId='${transactionId}'`
+    );
   }
 };

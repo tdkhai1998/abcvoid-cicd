@@ -11,6 +11,7 @@ const multer = require("multer");
 var storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
+  console.log(file);
   // if (file.mimetype === "audio/wav") {
     cb(null, true);
   // } else {
@@ -29,7 +30,7 @@ router.post("/", upload.single("myFile"), async (req, res, next) => {
   let jsonData = "";
   const file = req.file;
   console.log('file in request---', file);
-  if (file.mimetype !== "audio/wav") {
+  if (file.mimetype !== "audio/wav" && file.mimetype !== "audio/wave" && file.mimetype !== "audio/x-wav") {
     const error = new Error("Chỉ chấp nhận file .wav");
     error.httpStatusCode = 400;
     return next(error);

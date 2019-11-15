@@ -29,5 +29,5 @@ module.exports = {
   addRecoverToken: entity => db.update("user", "email", entity),
   changePassword: (email, info) =>
     db.load(`UPDATE user SET PASSWORD = '${info}' WHERE email = '${email}'`),
-  findApiKeys: id => db.load(`select * from api_key where user_id = '${id}'`)
+  findApiKeys: id => db.load(`select * from api_key where user_id = '${id}' `)
 };
