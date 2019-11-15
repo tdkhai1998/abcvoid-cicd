@@ -1,11 +1,11 @@
 var express = require("express");
 var router = express.Router();
-var packageKeyModel = require("../model/packageKey.model");
-var keyModel = require("../model/key.model");
-var toFunc = require("../util/toFunction");
+var packageKeyModel = require("../../model/packageKey.model");
+var keyModel = require("../../model/key.model");
+var toFunc = require("../../util/toFunction");
 var bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const account = require("../const/emailAccount");
+const account = require("../../const/emailAccount");
 let message = false;
 /* GET home page. */
 router.get("/", async function(req, res, next) {

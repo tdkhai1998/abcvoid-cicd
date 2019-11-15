@@ -4,7 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var app = express();
-var auth = require("./middleware/auth");
 
 require("./middleware/session")(app);
 require("./middleware/passport")(app);
@@ -36,23 +35,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-var user = require("./routes/user");
 //routes
-app.use("/", require("./routes/home"));
 
-app.use("/profile", auth.user, user.profile);
-app.use("/login", auth.guest, user.login); //đăng nhập rồi thì không cho vô login nữa kkk
-app.use("/forgotPassword", user.forgotPass);
-app.use("/logout", auth.user, user.logout);
-app.use("/register", auth.user, user.register);
-app.use("/recoverPassword", auth.user, user.changePass);
-
-app.use("/demo", require("./routes/demo"));
-app.use("/abcvoiceapi", require("./routes/api/abcvoiceAPI"));
-app.use("/apidoc", require("./routes/apidocument"));
-app.use("/packages", require("./routes/packages"));
-app.use("/admin/", require("./routes/admin/statistic"));
-app.use("/error", require("./routes/error/error"));
+require("./routes")(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -68,19 +53,14 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   if (err.status === 404) {
-    res.redirect("/error/404");
+    res.render("error/404");
     return;
   }
   if (err.status === 403) {
-    res.redirect("/error/403");
+    res.render("error/403");
     return;
   }
   res.render("error/normalError", { message: err });
 });
 
-var server = app.listen(8000, function() {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log("ABCVoice dang hoat dong tai dia chi: http://%s:%s", host, port);
-});
 module.exports = app;
