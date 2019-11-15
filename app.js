@@ -60,6 +60,7 @@ app.use(function(err, req, res, next) {
     res.render("error/403");
     return;
   }
+
   res.render("error/normalError", { message: err });
 });
 
