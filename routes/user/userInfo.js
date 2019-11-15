@@ -49,9 +49,10 @@ router.post("/", async (req, res, next) => {
   const user = req.user;
   const name = req.body.name;
   if (name) {
+    const newUser = Object.assign({}, user);
+    newUser.name = name;
     user.name = name;
-    console.log(user);
-    userModel.update(user);
+    userModel.update(newUser);
   }
   res.redirect("/profile");
 });
