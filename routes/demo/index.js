@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var transcribe_middleware = require("../middleware/transcribe");
+var transcribe_middleware = require("../../middleware/transcribe");
 var request = require("request");
 // packages upload file
 const multer = require("multer");
@@ -11,7 +11,7 @@ var storage = multer.memoryStorage();
 const fileFilter = (req, file, cb) => {
   console.log(file);
   // if (file.mimetype === "audio/wav" || file.mimetype === "audio/wave" || file.mimetype === "audio/x-wav") {
-    cb(null, true);
+  cb(null, true);
   // } else {
   //   cb(new Error("Chỉ chấp nhận file .wav"), false);
   // }
