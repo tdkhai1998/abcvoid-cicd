@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
-
+const accessControlModel = require('../../model/accessControl.model');
+const moment = require('moment');
 /* GET home page. */
-router.get("/accessmanage", function(req, res, next) {
+router.get("/accessmanage", async (req, res, next) => {
   console.log(req.user);
   res.render("statistic/accessNumber", { title: "Express", user: req.user });
 });
