@@ -30,5 +30,6 @@ module.exports = {
   changePassword: (email, info) =>
     db.load(`UPDATE user SET PASSWORD = '${info}' WHERE email = '${email}'`),
   findApiKeys: id => db.load(`select * from api_key where user_id = '${id}' `),
-  count: () => db.load(`select count (*) from user `)
+  count: () => db.load(`select count (*) from user `),
+  listInLimit:(page,limitPerPage) => db.load(`select * from user limit ${page},${limitPerPage}`)
 };

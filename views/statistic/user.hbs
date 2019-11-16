@@ -35,24 +35,27 @@
                                 <div class="visit">Detail</div>
 
                             </div>
-
+                             {{#each userList}}
                             <div class="table-row">
                                 {{!-- đổ data ở đây --}}
-                                <div class="serial" style="justify-content: center">1</div>
+                                
+                                <div class="serial" style="justify-content: center">{{@index}}</div>
                                 <div class="visit" style="justify-content: center"><input form="updateform"
-                                        type="hidden" name="id">huydeptrai
+                                        type="hidden" name="id">{{this.id}}
                                 </div>
                                 <div class="visit" style="justify-content: center"><input form="updateform"
-                                        type="hidden" name="id">huydeptrai
+                                        type="hidden" name="id">{{this.name}}
                                 </div>
-                                <div class="country" style="justify-content: center">wedday2004x@gmail.com</div>
+                                <div class="country" style="justify-content: center">{{this.email}}</div>
                                 <div class="visit">
                                     <form id="updateform" method="POST" action='profile/updatekey' style="width:100%">
                                         <button style="justify-content: center" class="genric-btn primary-border circle"
                                             type="submit"><a href="/admin/userdetail">Detail</a></button>
                                     </form>
                                 </div>
+                                
                             </div>
+                              {{/each}}
                         </div>
                         {{#each pages}}
                         <a class="getRevenueByYearBtn genric-btn success-border" href="/admin/usermanage/page={{this.id}}">{{this.id}}</a>

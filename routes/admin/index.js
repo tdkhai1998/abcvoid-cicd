@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const userModel = require("../../model/user.model");
-const limitOfNumPage = 10 ;
+const limitOfPerPage = 10 ;
 /* GET home page. */
 router.get("/accessmanage", function(req, res, next) {
   console.log(req.user);
@@ -18,12 +18,11 @@ router.get("/usermanage/page=:pageNumber", async (req, res, next) => {
     const getSizeOfTotal = await userModel.count();
     const sizeOfTotal = getSizeOfTotal[0]["count (*)"]
     
-  const numberOfPage = Math.ceil(sizeOfTotal / limitOfNumPage);
-  console.log("sooo",numberOfPage);
+  const totalOfPage = Math.ceil(sizeOfTotal / limitOfPerPage);
   const pages = [];
 
-  for (let i = 1; i <= numberOfPage; i++) {
-    if (i == req.params.pageNumber)
+  for (let i = 1; i <= totalOfPage; i++) {
+    if (i === req.params.pageNumber)
       pages.push({
         id: i,
         curentPage: "disabled"
@@ -33,12 +32,11 @@ router.get("/usermanage/page=:pageNumber", async (req, res, next) => {
         id: i
       });
   }
-
-  //const customerList = await customer.list(req.params.pageNumber);
-
+  const page = (req.params.pageNumber-1)*limitOfPerPage;
+  const userList = await userModel.listInLimit(page,limitOfPerPage)
 
   console.log(req.user);
-  res.render("statistic/user", { title: "Express", user: req.user,pages });
+  res.render("statistic/user", { title: "Express", user: req.user,pages,userList });
 });
 
 router.get("/userdetail", function(req, res, next) {
