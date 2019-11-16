@@ -44,6 +44,7 @@ router.post("/renewkey", async (req, res, next) => {
     .format("YYYY-MM-DD");
   await apiKeyModel.update(key[0]);
   res.redirect("/profile");
+
 });
 router.post("/", async (req, res, next) => {
   const user = req.user;
