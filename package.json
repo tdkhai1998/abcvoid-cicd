@@ -6,7 +6,7 @@
     "lint": "eslint",
     "s": "bin/pre-push-check.sh",
     "server": "babel-node app",
-    "start": "set NODE_ENV=development && npm-run-all  server"
+    "start": "npm-run-all  server"
   },
   "dependencies": {
     "babel": "^6.23.0",
