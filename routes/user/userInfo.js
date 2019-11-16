@@ -30,7 +30,7 @@ router.post("/updatekey", async (req, res, next) => {
   console.log("key-------", key);
   key[0].value = genKey();
   console.log("keyafterrr-------", key);
-  await apiKeyModel.update("id", key[0]);
+  await apiKeyModel.update(key[0]);
   res.redirect("/profile");
 });
 router.post("/renewkey", async (req, res, next) => {
