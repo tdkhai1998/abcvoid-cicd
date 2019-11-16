@@ -1,6 +1,11 @@
 var express = require("express");
 var router = express.Router();
 const userModel = require("../../model/user.model");
+const apiKeyModel = require("../../model/key.model");
+const packageModel = require("../../model/packageKey.model");
+const toFunction = require("../../util/toFunction");
+const moment = require("moment");
+const genKey = require("../../function/genarateKey");
 const limitOfPerPage = 10 ;
 /* GET home page. */
 router.get("/accessmanage", function(req, res, next) {
@@ -39,9 +44,40 @@ router.get("/usermanage/page=:pageNumber", async (req, res, next) => {
   res.render("statistic/user", { title: "Express", user: req.user,pages,userList });
 });
 
-router.get("/userdetail", function(req, res, next) {
-  console.log(req.user);
-  res.render("statistic/userdetail", { title: "Express", user: req.user });
+router.get("/userdetail/id=:id", async(req, res, next) => {
+  // const userDetail = await userModel.singleById(req.params.id)
+  // console.log("userdetial",userDetail);
+  const listKey = await toFunction(apiKeyModel.getKeyById(req.params.id));
+  if (listKey[0]) {
+    return next(listKey[0]);
+  }
+  listKey[1] = listKey[1].map(elem => {
+    elem.date_expired = moment(elem.date_expired).format("DD/MM/YYYY");
+    return elem;
+  });
+  console.log("xdcfvgbhn", listKey);
+  res.render("statistic/userdetail", { title: "Express", user: req.user,listKey: listKey[1] });
 });
+router.post("/userdetail/id=:id/changekey", async (req, res, next) => {
+  console.log("idddddd", req.body.id);
+  const key = await apiKeyModel.searchKey(req.body.id);
+  console.log("key-------", key);
+  key[0].value = genKey();
+  console.log("keyafterrr-------", key);
+  await apiKeyModel.update(key[0]);
+  //res.redirect("/profile");
+});
+router.post("/renewkey", async (req, res, next) => {
+  console.log("reqbody--", req.body);
+  let key = await apiKeyModel.singleById(req.body.idKey);
+  let packageInfo = await packageModel.singleById(req.body.idPackage);
+  console.log("packgasdsad", packageInfo);
+  console.log("key------", key);
+  key[0].date_expired = moment(key[0].date_expired)
+    .add(packageInfo[0].term, "days")
+    .format("YYYY-MM-DD");
+  await apiKeyModel.update(key[0]);
+  //res.redirect("/profile");
 
+});
 module.exports = router;

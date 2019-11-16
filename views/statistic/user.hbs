@@ -36,8 +36,9 @@
 
                             </div>
                              {{#each userList}}
+                             {{!-- đổ data ở đây --}}
                             <div class="table-row">
-                                {{!-- đổ data ở đây --}}
+                                {{!-- NOT đổ data ở đây --}}
                                 
                                 <div class="serial" style="justify-content: center">{{@index}}</div>
                                 <div class="visit" style="justify-content: center"><input form="updateform"
@@ -48,9 +49,9 @@
                                 </div>
                                 <div class="country" style="justify-content: center">{{this.email}}</div>
                                 <div class="visit">
-                                    <form id="updateform" method="POST" action='profile/updatekey' style="width:100%">
+                                    <form id="updateform" method="POST"  style="width:100%">
                                         <button style="justify-content: center" class="genric-btn primary-border circle"
-                                            type="submit"><a href="/admin/userdetail">Detail</a></button>
+                                            type="submit"><a href="/admin/userdetail/id={{this.id}}">Detail</a></button>
                                     </form>
                                 </div>
                                 

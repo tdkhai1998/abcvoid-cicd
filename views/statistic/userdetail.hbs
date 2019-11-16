@@ -39,7 +39,8 @@
                                     <div class="visit">Renew</div>
                                     <div class="visit">Valid</div>
                                 </div>
-
+                                {{#each listKey}}
+                                {{!-- đổ data ở đây --}}
                                 <div class="table-row">
 
                                     <div class="serial">{{id}}</div>
@@ -52,7 +53,7 @@
                                     <div class="country" style="justify-content: center">{{date_expired}}</div>
 
                                     <div class="visit">
-                                        <form id="updateform" method="POST" action='profile/updatekey'
+                                        <form id="updateform" method="POST" action='updatekey'
                                             style="width:100%">
                                             <button style="justify-content: center"
                                                 class="genric-btn primary-border circle" type="submit">Change</button>
@@ -61,21 +62,24 @@
                                     </div>
 
                                     <div class="visit">
-                                        <form id="renewkey" method="POST" action="profile/renewkey" style="width:100%">
+                                        <form id='updateform{{id}}' method="POST" action='/profile/updatekey'
+                                            style="width:100%">
+                                            <button style="justify-content: center"
+                                                class="genric-btn primary-border circle" type="submit">Change</button>
+                                        </form>
+
+                                    </div>
+
+                                    <div class="visit">
+                                        <form id="renewkey{{id}}" method="POST" action="/profile/renewkey"
+                                            style="width:100%">
                                             <button style="justify-content: center"
                                                 class="genric-btn success-border circle" type="submit">Renew</button>
                                         </form>
                                     </div>
-                                    {{!-- valid thì button là disable invalid thì enable --}}
-                                    <div class="visit">
-                                        <form id="renewkey" method="POST" action="profile/renewkey" style="width:100%">
-                                            <button style="justify-content: center"
-                                                class="genric-btn success-border circle" type="submit">Disable</button>
-                                        </form>
-                                    </div>
 
                                 </div>
-
+                                {{/each}}
                             </div>
                             <button class="getRevenueByYearBtn genric-btn success-border"><a>trang1</a></button>
                             <button class="getRevenueByYearBtn genric-btn success-border"><a>trang2</a></button>
