@@ -55,16 +55,16 @@
                     <div class="table-row">
 
                         <div class="serial">{{id}}</div>
-                        <div class="percentage"><input form="updateform" type="hidden" name="id"
-                                value={{value}}>{{value}}</div>
-                        <input form="renewkey" type="hidden" name="idPackage" value={{id_package}}>
-                        <input form="renewkey" type="hidden" name="idKey" value={{id}}>
+                        <div class="percentage"><input form="updateform{{id}}" type="hidden" name="id"
+                                value={{value}} />{{value}}</div>
+                        <input form="renewkey{{id}}" type="hidden" name="idPackage" value={{id_package}}>
+                        <input form="renewkey{{id}}" type="hidden" name="idKey" value={{id}}>
 
                         <div class="country" style="justify-content: center">{{name_package}}</div>
                         <div class="country" style="justify-content: center">{{date_expired}}</div>
 
                         <div class="visit">
-                            <form id="updateform" method="POST" action='profile/updatekey' style="width:100%">
+                            <form id='updateform{{id}}' method="POST" action='profile/updatekey' style="width:100%">
                                 <button style="justify-content: center" class="genric-btn primary-border circle"
                                     type="submit">Change</button>
                             </form>
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="visit">
-                            <form id="renewkey" method="POST" action="profile/renewkey" style="width:100%">
+                            <form id="renewkey{{id}}" method="POST" action="profile/renewkey" style="width:100%">
                                 <button style="justify-content: center" class="genric-btn success-border circle"
                                     type="submit">Renew</button>
                             </form>
