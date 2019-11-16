@@ -42,7 +42,7 @@ router.post("/renewkey", async (req, res, next) => {
   key[0].date_expired = moment(key[0].date_expired)
     .add(packageInfo[0].term, "days")
     .format("YYYY-MM-DD");
-  await apiKeyModel.update("id", key[0]);
+  await apiKeyModel.update(key[0]);
   res.redirect("/profile");
 });
 router.post("/", async (req, res, next) => {
