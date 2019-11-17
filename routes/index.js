@@ -8,7 +8,7 @@ const router = app => {
   app.use("/login", auth.guest, user.login); //đăng nhập rồi thì không cho vô login nữa kkk
   app.use("/forgotPassword", user.forgotPass);
   app.use("/logout", auth.user, user.logout);
-  app.use("/register", auth.user, user.register);
+  app.use("/register", user.register);
   app.use("/recoverPassword", auth.user, user.changePass);
 
   app.use("/demo", require("./demo"));

@@ -7,7 +7,10 @@ const account = require("../../const/emailAccount");
 let message = false;
 /* GET emailForgot page. */
 router.get("/", function(req, res, next) {
-  res.render("passwordforgot/passwordForgot", { title: "Email Forgot",message: message });
+  res.render("passwordforgot/passwordForgot", {
+    title: "Email Forgot",
+    message: message
+  });
   message = false;
 });
 
