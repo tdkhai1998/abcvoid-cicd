@@ -53,22 +53,14 @@
                                     <div class="country" style="justify-content: center">{{date_expired}}</div>
 
                                     <div class="visit">
-                                        <form id="updateform" method="POST" action='updatekey'
-                                            style="width:100%">
+                                        <form id="updateform{{id}}" method="POST" action='changekey' style="width:100%">
                                             <button style="justify-content: center"
                                                 class="genric-btn primary-border circle" type="submit">Change</button>
                                         </form>
 
                                     </div>
 
-                                    <div class="visit">
-                                        <form id='updateform{{id}}' method="POST" action='/profile/updatekey'
-                                            style="width:100%">
-                                            <button style="justify-content: center"
-                                                class="genric-btn primary-border circle" type="submit">Change</button>
-                                        </form>
 
-                                    </div>
 
                                     <div class="visit">
                                         <form id="renewkey{{id}}" method="POST" action="/profile/renewkey"
@@ -77,12 +69,21 @@
                                                 class="genric-btn success-border circle" type="submit">Renew</button>
                                         </form>
                                     </div>
+                                    <div class="visit">
+                                        <form id='updateform{{id}}' method="POST" action='/profile/updatekey'
+                                            style="width:100%">
+                                            <button style="justify-content: center"
+                                                class="genric-btn primary-border circle" type="submit">Disable</button>
+                                        </form>
 
+                                    </div>
                                 </div>
                                 {{/each}}
                             </div>
-                            <button class="getRevenueByYearBtn genric-btn success-border"><a>trang1</a></button>
-                            <button class="getRevenueByYearBtn genric-btn success-border"><a>trang2</a></button>
+                            {{#each pages}}
+                            <a class="getRevenueByYearBtn genric-btn success-border"
+                                href="page={{this.id}}">{{this.id}}</a>
+                            {{/each}}
                         </div>
                     </div>
                 </div>

@@ -44,10 +44,29 @@ router.get("/usermanage/page=:pageNumber", async (req, res, next) => {
   res.render("statistic/user", { title: "Express", user: req.user,pages,userList });
 });
 
-router.get("/userdetail/id=:id", async(req, res, next) => {
-  // const userDetail = await userModel.singleById(req.params.id)
-  // console.log("userdetial",userDetail);
-  const listKey = await toFunction(apiKeyModel.getKeyById(req.params.id));
+router.get("/userdetail/id=:id/page=:pageNumber", async(req, res, next) => {
+  const idUser = req.params.id;
+  const getSizeOfTotal = await apiKeyModel.countOderByUserId(idUser);
+    const sizeOfTotal = getSizeOfTotal[0]["count (*)"]
+  
+
+  const totalOfPage = Math.ceil(sizeOfTotal / limitOfPerPage);
+  const pages = [];
+
+  for (let i = 1; i <= totalOfPage; i++) {
+    if (i === req.params.pageNumber)
+      pages.push({
+        id: i,
+        curentPage: "disabled"
+      });
+    else
+    pages.push({
+        id: i
+      });
+  }
+  const page = (req.params.pageNumber-1)*limitOfPerPage;
+
+  const listKey = await toFunction(apiKeyModel.listInLimit(idUser,page,limitOfPerPage));
   if (listKey[0]) {
     return next(listKey[0]);
   }
@@ -56,18 +75,18 @@ router.get("/userdetail/id=:id", async(req, res, next) => {
     return elem;
   });
   console.log("xdcfvgbhn", listKey);
-  res.render("statistic/userdetail", { title: "Express", user: req.user,listKey: listKey[1] });
+  res.render("statistic/userdetail", { title: "Express", user: req.user,listKey: listKey[1],pages });
 });
-router.post("/userdetail/id=:id/changekey", async (req, res, next) => {
+router.post("/userdetail/changekey", async (req, res, next) => {
   console.log("idddddd", req.body.id);
   const key = await apiKeyModel.searchKey(req.body.id);
   console.log("key-------", key);
   key[0].value = genKey();
   console.log("keyafterrr-------", key);
   await apiKeyModel.update(key[0]);
-  //res.redirect("/profile");
+  res.redirect(`${req.headers.referer}`);
 });
-router.post("/renewkey", async (req, res, next) => {
+router.post("/userdetail/renewkey", async (req, res, next) => {
   console.log("reqbody--", req.body);
   let key = await apiKeyModel.singleById(req.body.idKey);
   let packageInfo = await packageModel.singleById(req.body.idPackage);
@@ -77,7 +96,7 @@ router.post("/renewkey", async (req, res, next) => {
     .add(packageInfo[0].term, "days")
     .format("YYYY-MM-DD");
   await apiKeyModel.update(key[0]);
-  //res.redirect("/profile");
+  res.redirect(`${req.headers.referer}`);
 
 });
 module.exports = router;

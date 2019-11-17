@@ -1,22 +1,15 @@
-import { user as _user, guest } from "../middleware/auth";
-import {
-  profile,
-  login,
-  forgotPass,
-  logout,
-  register,
-  changePass
-} from "./user";
-import admin from "./admin";
+var auth = require("../middleware/auth");
+var user = require("./user");
+var admin = require("./admin");
 const router = app => {
   app.use("/", require("./home"));
 
-  app.use("/profile", _user, profile);
-  app.use("/login", guest, login); //đăng nhập rồi thì không cho vô login nữa kkk
-  app.use("/forgotPassword", forgotPass);
-  app.use("/logout", _user, logout);
-  app.use("/register", _user, register);
-  app.use("/recoverPassword", _user, changePass);
+  app.use("/profile", auth.user, user.profile);
+  app.use("/login", auth.guest, user.login); //đăng nhập rồi thì không cho vô login nữa kkk
+  app.use("/forgotPassword", user.forgotPass);
+  app.use("/logout", auth.user, user.logout);
+  app.use("/register", auth.user, user.register);
+  app.use("/recoverPassword", auth.user, user.changePass);
 
   app.use("/demo", require("./demo"));
   app.use("/abcvoiceapi", require("./api/abcvoiceAPI"));
@@ -25,4 +18,4 @@ const router = app => {
   app.use("/admin", admin);
 };
 
-export default router;
+module.exports = router;

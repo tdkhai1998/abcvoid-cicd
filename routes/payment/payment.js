@@ -1,11 +1,11 @@
-import { Router } from "express";
-const router = Router();
-import { singleById, update } from "../../model/key.model";
-import toFunc from "../../util/toFunction";
+var express = require("express");
+var router = express.Router();
+const keyModel = require("../../model/key.model");
+const toFunc = require("../../util/toFunction");
 
-const getInfoApiKey = async (req, res) => {
+const getInfoApiKey = async (req, res, next) => {
   const id = req.params.id;
-  const key = await toFunc(singleById(id));
+  const key = await toFunc(keyModel.singleById(id));
   if (key[0]) {
     return { error: key[0] };
   }
@@ -29,7 +29,7 @@ router.post("/:id", async (req, res, next) => {
   if (data.transactionId === transactionId) {
     data.valid = true;
     data.transactionId = null;
-    update("api_key", "id", data);
+    keyModel.update("api_key", "id", data);
     return res.redirect("/profile");
   }
   res.render("/payment/payment", {
@@ -39,4 +39,4 @@ router.post("/:id", async (req, res, next) => {
   });
 });
 
-export default router;
+module.exports = router;
