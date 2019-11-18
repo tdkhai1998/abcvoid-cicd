@@ -17,6 +17,10 @@ module.exports = {
   getKeyById: id => {
     return db.load(`select * from api_key where user_id='${id}' and valid = 1`);
   },
+  countOderByUserId: (userId) => {
+    return db.load(`select count (*) from api_key where user_id='${userId}'`);
+  },
+  listInLimit:(userId,page,limitPerPage) => db.load(`select * from api_key where user_id='${userId}' limit ${page},${limitPerPage}`),
   createEntity: (packages, userId, OTP) => {
     const entity = {};
     const today = new Date();
