@@ -30,9 +30,11 @@
                     <div class="single-element-widget mt-30">
 
                         <div class="default-select" id="default-select_2" style="display:flex">
-                            <select class="yearOptions"></select>
+                            <form method="GET" action="/admin/accessmanage">
+                            <select class="yearOptions" name="year"></select>
                             <button class="getAccessNumberBtn genric-btn success-border"><a
-                                    class="getAccessNumberLink">GET</a></button>
+                                    class="getAccessNumberLink" type="submit">GET</a></button>
+                            </form>
                         </div>
                     </div>
                         {{#each dataAccess}}

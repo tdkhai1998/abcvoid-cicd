@@ -13,11 +13,9 @@ let message = false;
 /* GET home page. */
 router.get("/accessmanage", async (req, res, next) => {
   console.log(req.user);
-  const year = moment().year();
-  const month = moment().month();
+  const year =  req.query.year || moment().year();
   console.log('year-----', year);
-  console.log('month------', month);
-  const access = await accessControlModel.singleByYearAndMonth(year, month + 1);
+  const access = await accessControlModel.singleByYearAndMonth(year);
   const defauleObj = {
     id: 0,
     value: 0

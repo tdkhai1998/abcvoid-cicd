@@ -8,7 +8,7 @@ module.exports = {
   searchKey: id => {
     return db.load(`select * from api_key where value='${id}'`);
   },
-  singleByYearAndMonth: (year, month) => {
+  singleByYearAndMonth: (year) => {
     return db.load(`select * from accessControl where year='${year}' order by month ASC`);
   },
   update: entity => {
