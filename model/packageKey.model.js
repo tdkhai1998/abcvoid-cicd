@@ -16,5 +16,8 @@ module.exports = {
   createEntity: () => ({
     user: "",
     key: ""
-  })
+  }),
+  getAll: () => {
+    return db.load(`select * from KeyPackages where id <> 0`);
+  },
 };

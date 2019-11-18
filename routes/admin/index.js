@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const accessControlModel = require('../../model/accessControl.model');
+const apiKeyModel = require('../../model/key.model');
+const keyModel = require('../../model/packageKey.model');
 const moment = require('moment');
 /* GET home page. */
 router.get("/accessmanage", async (req, res, next) => {
@@ -28,9 +30,34 @@ router.get("/accessmanage", async (req, res, next) => {
   console.log('dataaceessAfter----', dataAccess);
   res.render("statistic/accessNumber", { title: "Express", user: req.user, dataAccess });
 });
-router.get("/revenuemanage", function(req, res, next) {
+router.get("/revenuemanage", async (req, res, next) => {
   console.log(req.user);
-  res.render("statistic/revenue", { title: "Express", user: req.user });
+  const year = req.query.revenueByYear || moment().year();
+  console.log('year--', year);
+  const total = [];
+  for ( i =1 ; i<=12 ; i++) {
+    const monthFormat = ('0' + i).slice(-2)
+    const thang =  await apiKeyModel.getAllKeyByYear(year, monthFormat);
+    if (thang[0].total === null) {
+      thang[0].total = 0;
+    }
+    total.push({id: i, totalSum: thang[0].total});
+  }
+  const allPackage = await keyModel.getAll();
+  const yearBymonth = req.query.yearByMonth || moment().year();
+  const monthBymonth = req.query.monthByMonth || moment().month() + 1;
+  let byMonth = await apiKeyModel.getAllKeyByYearPackage(yearBymonth, monthBymonth);
+  byMonth = byMonth.map((elem, index) => {
+    elem.id = index + 100;
+    elem.idName = index + 1000;
+    return elem;
+  });
+
+  console.log('byMonth----', byMonth);
+  console.log('allPackage----', allPackage);
+  console.log('total----', total);
+  const numberPackage = byMonth.length;
+  res.render("statistic/revenue", { title: "Express", user: req.user, total, byMonth, numberPackage });
 });
 
 router.get("/usermanage", function(req, res, next) {
