@@ -118,6 +118,7 @@ router.post("/verify", async (req, res, next) => {
       //   next(result[0]);
       // } else {
       keyModel.update(api_key[1][0]);
+      console.log("valid---", api_key[1][0]);
       message = "Your key is activated successfully !!!";
       //res.redirect("/");
       //}
