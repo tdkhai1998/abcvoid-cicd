@@ -44,7 +44,7 @@ module.exports = {
     entity.valid = true;
     entity.price = 0;
     entity.date_expired = new Date();
-    entity.name_package = null;
+    entity.name_package = "Free";
     entity.transactionId = null;
     return entity;
   },

@@ -39,8 +39,11 @@
         </div>
         <div class="section-top-border">
             <h3 class="mb-30">List of Keys</h3>
-            <a href="/packages/verify" style="justify-content: end" class="genric-btn success-border radius">Add new
-                key</a>
+            <div style="display:flex ; flex-direction:row-reverse; margin-bottom:5px"> <a href="/packages/verify"
+                    class="genric-btn success-border radius">
+                    Add new key</a>
+            </div>
+
             <div class="progress-table-wrap">
                 <div class="progress-table">
                     <div class="table-head">
@@ -63,20 +66,23 @@
                         <div class="country" style="justify-content: center">{{name_package}}</div>
                         <div class="country" style="justify-content: center">{{date_expired}}</div>
 
+
                         <div class="visit">
                             <form id='updateform{{id}}' method="POST" action='profile/updatekey' style="width:100%">
-                                <button style="justify-content: center" class="genric-btn primary-border circle"
+                                <button {{#if_not_eq name_package "Free"}} {{else}} disabled{{/if_not_eq}}
+                                    style="justify-content: center" class="genric-btn primary-border circle"
                                     type="submit">Change</button>
                             </form>
 
                         </div>
-
                         <div class="visit">
                             <form id="renewkey{{id}}" method="POST" action="profile/renewkey" style="width:100%">
-                                <button style="justify-content: center" class="genric-btn success-border circle"
+                                <button {{#if_not_eq name_package "Free"}} {{else}} disabled{{/if_not_eq}}
+                                    style="justify-content: center" class="genric-btn success-border circle"
                                     type="submit">Renew</button>
                             </form>
                         </div>
+
 
 
                     </div>
