@@ -55,20 +55,23 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            {{#each  listKey}}
+
+            {{#each listKey as |kl|}}
+            {{#if_not_eq kl.name "Free"}}
             <div class="col-lg-4 col-sm-6 mb-4">
                 <div class="single_pricing_part">
                     <img src="img/icon/feature_icon_3.png" alt="">
-                    <p>{{name}}</p>
-                    <h3>{{price}} VND<span>/{{term}} days</span></h3>
+                    <p>{{kl.name}}</p>
+                    <h3>{{kl.price}} VND<span>/{{kl.term}} days</span></h3>
                     <ul>
-                        <li>{{term}} days</li>
-                        <li>{{limitNumberOfReq}} Request Limit</li>
+                        <li>{{kl.term}} days</li>
+                        <li>{{kl.limitNumberOfReq}} Request Limit</li>
                         <li>24/7 Support</li>
                     </ul>
-                    <a href="/packages/buy/{{id}}" class="btn_1">Buy</a>
+                    <a href="/packages/buy/{{kl.id}}" class="btn_1">Buy</a>
                 </div>
             </div>
+            {{/if_not_eq}}
             {{/each}}
         </div>
     </div>
