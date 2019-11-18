@@ -6,12 +6,12 @@ let currentYear = new Date().getFullYear();
 let startYear = 2015;
 while (startYear <= currentYear) {
   startYear++;
-  $(".yearOptions").append(`<option value=${startYear}>${startYear}</option>`);
+  $(".yearOptions").append(`<option value=${startYear} id='${startYear}yeara'>${startYear}</option>`);
 }
 let month = 0;
 while (month <= 11) {
   month++;
-  $(".monthOptions").append(`<option value=${month}>${month}</option>`);
+  $(".monthOptions").append(`<option value=${month} id='${month}month'>${month}</option>`);
 }
 
 // thống kê số lượng truy cập

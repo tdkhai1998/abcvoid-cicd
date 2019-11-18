@@ -30,16 +30,26 @@
                     <div class="single-element-widget mt-30">
 
                         <div class="default-select" id="default-select_2" style="display:flex">
-                            <select class="yearOptions"></select>
+                            <form method="GET" action="/admin/accessmanage">
+                            <select class="yearOptions" name="year"></select>
                             <button class="getAccessNumberBtn genric-btn success-border"><a
-                                    class="getAccessNumberLink">GET</a></button>
+                                    class="getAccessNumberLink" type="submit">GET</a></button>
+                            </form>
                         </div>
-
                     </div>
+                        {{#each dataAccess}}
+                        <span style="color: white;" id={{id}} name={{id}}>{{value}}</span>
+                        {{/each}}
                     <canvas id="accessNumberChart"></canvas>
+                    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                     <script>
                         //đổ data ở đây !
-                        let data = [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3];
+                        let data = [0,0,0,0,0,0,0,0,0,0,0,0];
+                        data = data.map((elem, index) => {
+                            return (parseInt($(`#${index+1}`).html()) || 0);
+                        });
+                        console.log('data----', data);
+                        console.log('vaalll',$("#10").html());
                         var ctx = document.getElementById("accessNumberChart");
                         var accessNumberChart = new Chart(ctx, {
                             type: 'line',
