@@ -31,7 +31,7 @@
                     <div class="single-element-widget mt-30">
                         <div class="default-select" id="default-select_2" style="display:flex">
                             <form method="GET" action="/admin/accessmanage">
-                            <select class="yearOptions" name="year"></select>
+                            <select class="yearOptions" name="year" id="ByYear"></select>
                             <button type="submit" class="getAccessNumberBtn genric-btn success-border">GET</button>
                             </form>
                         </div>
@@ -104,5 +104,6 @@
         `<option value=${startYear} id='${startYear}year'>${startYear}</option>`
     );
     }
+    console.log("{{ByYearValue}}")
     $(`#ByYear option[value=${"{{ByYearValue}}"}]`).attr("selected", true);
 </script>
