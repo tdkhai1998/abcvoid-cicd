@@ -5,15 +5,11 @@ const moment = require("moment");
 const apiKeyModel = require("../../model/key.model");
 const keyModel = require("../../model/packageKey.model");
 // ---------------------------------------------------------------
-router.get("/accessmanage", async (req, res, next) => {
+router.get("/accessmanage", async (req, res) => {
   console.log(req.user);
   const year = req.query.year || moment().year();
   console.log("year-----", year);
   const access = await accessControlModel.singleByYearAndMonth(year);
-  const defauleObj = {
-    id: 0,
-    value: 0
-  };
   // let dataAccess = Array(12).fill(Object.assign({}, {id: 0, value: 0}));
   let dataAccess = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   console.log("dataaccess----", dataAccess);
@@ -34,12 +30,12 @@ router.get("/accessmanage", async (req, res, next) => {
   });
 });
 // ---------------------------------------------------------------
-router.get("/revenuemanage", async (req, res, next) => {
+router.get("/revenuemanage", async (req, res) => {
   console.log(req.user);
   const year = req.query.revenueByYear || moment().year();
   console.log("year--", year);
   const total = [];
-  for (i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 12; i++) {
     const monthFormat = ("0" + i).slice(-2);
     const thang = await apiKeyModel.getAllKeyByYear(year, monthFormat);
     if (thang[0].total === null) {

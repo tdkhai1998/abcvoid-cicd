@@ -18,7 +18,6 @@ module.exports = {
       res.redirect("/login");
     }
   },
-
   user: (req, res, next) => {
     if (req.user) {
       if (req.user.role === "user") {
