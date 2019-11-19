@@ -1,7 +1,9 @@
 {{>adminHeader user=this.user}}
-<!-- banner part start-->
+
 {{>adminHeader user=this.user}}
-<!-- breadcrumb start-->
+
+
+
 <section class="breadcrumb breadcrumb_bg">
     <div class="container">
         <div class="row">
@@ -15,10 +17,7 @@
         </div>
     </div>
 </section>
-<!-- breadcrumb start-->
 
-<!--================Blog Area =================-->
-<!-- use sasu part end-->
 <section class="use_sasu">
     <div class="container">
         <div class="row justify-content-center">
@@ -27,7 +26,6 @@
                     <h2>REVENUE BY YEAR</h2>
                     <div class="chart" style="position: relative; height:200px; margin-bottom:100px">
                         <div class="single-element-widget mt-30">
-
                             <div class="default-select" id="default-select_2" style="display:flex">
                                 <form method="GET" id="revenue" action="/admin/revenuemanage">
                                 <select class="yearOptions" name="revenueByYear" id="revenueByYear-YearOptions"></select>
@@ -84,21 +82,17 @@
                             });
                         </script>
                     </div>
-
                     <h2>REVENUE BY MONTH </h2>
                     <div class="chart" style="position: relative; height:200px;">
                         <div class="single-element-widget mt-30">
-
                             <div class="default-select" id="default-select_2" style="display:flex">
                                 <select form="revenue" class="yearOptions"  name="yearByMonth" id="revenueByMonth-YearOptions"></select>
                                 <select form="revenue" class="monthOptions" name="monthByMonth" id="monthByMonth-MonthOptions"></select>
                                 <button form="revenue" class="getRevenueByMonthBtn genric-btn success-border" type="submit">GET</button>
                             </div>
-
                         </div>
                         <canvas id="revenueByMonth"></canvas>
                         <script>
-                            {{!-- //đổ data ở đây ! --}}
                             let packageData = Array(parseInt($(`#leng`).html())).fill('');
                             packageData = packageData.map((elem, index) => {
                                 return ($(`#${index+1000}`).html()) || '';
@@ -115,7 +109,7 @@
                                 data: {
                                     labels: packageData,
                                     datasets: [{
-                                        label: "",
+                                        label: "VND",
                                         data: revenueData2,
                                         backgroundColor: [
                                             'rgba(255, 99, 132, 0.2)',
@@ -143,38 +137,32 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row justify-content-center">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="single_feature">
-                            <div class="single_feature_part">
-                                <img src="img/icon/feature_icon_1.png" alt="">
-                                <h4>A Volunteer</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="single_feature">
-                            <div class="single_feature_part">
-                                <img src="img/icon/feature_icon_2.png" alt="">
-                                <h4>A Volunteer</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="single_feature">
-                            <div class="single_feature_part">
-                                <img src="img/icon/feature_icon_3.png" alt="">
-                                <h4>A Volunteer</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
     </div>
-
 </section>
-<!--================Blog Area =================-->
+
+{{#section 'footer'}}
+   <script src="/js/myCustom.js"></script>
+{{/section}}
 
 {{>footer}}
+
+<script >
+    let currentYear = new Date().getFullYear();
+    let startYear = 2015;
+    while (startYear <= currentYear) {
+        startYear++;
+        $(".yearOptions").append(
+            `<option value=${startYear} id='${startYear}year'>${startYear}</option>`
+        );
+    }
+    let month = 0;
+    while (month <= 11) {
+        month++;
+        $(".monthOptions").append(
+            `<option value=${month} id='${month}month'>${month}</option>`
+        );
+    }
+     $(`#ByYear option[value=${"{{ByYearValue}}"}]`).attr("selected", true);
+     $(`#revenueByMonth-YearOptions option[value=${"{{ByMonthyearValue}}"}]`).attr("selected", true);
+     $(`#monthByMonth-MonthOptions option[value=${"{{ByMonthmonthValue}}"}]`).attr("selected", true);
+</script>
