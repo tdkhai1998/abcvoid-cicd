@@ -55,7 +55,7 @@ router.get("/:id", async (req, res, next) => {
   });
   message = false;
 });
-router.post("/changekey", async (req, res, next) => {
+router.post("/changekey", async (req, res) => {
   console.log("idddddd", req.body.id);
   const key = await apiKeyModel.searchKey(req.body.id);
   console.log("key-------", key);
@@ -65,7 +65,7 @@ router.post("/changekey", async (req, res, next) => {
   message = "Changed user's key successfully !!!";
   res.redirect(`${req.headers.referer}`);
 });
-router.post("/renewkey", async (req, res, next) => {
+router.post("/renewkey", async (req, res) => {
   console.log("reqbody--", req.body);
   let key = await apiKeyModel.singleById(req.body.idKey);
   let packageInfo = await packageModel.singleById(req.body.idPackage);
