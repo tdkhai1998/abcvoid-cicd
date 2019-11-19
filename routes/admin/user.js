@@ -3,7 +3,7 @@ var router = express.Router();
 const userModel = require("../../model/user.model");
 const limitOfPerPage = require("../../const").limitOfPerPage;
 // ---------------------------------------------------------------
-router.get("/", async (req, res, next) => {
+router.get("/", async (req, res) => {
   let pageNumber = Number(req.query.page || 1);
   const getSizeOfTotal = await userModel.count();
   const sizeOfTotal = getSizeOfTotal[0]["count (*)"];
