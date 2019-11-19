@@ -2,8 +2,8 @@
 
 abc-voice
 
-#INSTALL
+#  INSTALL
 npm install
-#RUN
+# RUN
 npm run start
 dev<nodemon> : npm run dev
