@@ -8,6 +8,7 @@ const nodemailer = require("nodemailer");
 const account = require("../../const/emailAccount");
 let message = false;
 /* GET home page. */
+
 router.get("/", async function(req, res, next) {
   console.log(req.user);
   const listKey = await toFunc(packageKeyModel.getAll());

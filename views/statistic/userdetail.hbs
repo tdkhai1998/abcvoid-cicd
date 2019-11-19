@@ -1,3 +1,4 @@
+
 <!--Modal: modalPush-->
 <div class="modal fade  {{#if message}}show{{/if}}" id="modalPush" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true" {{#if message}} style="display:block" {{/if}}>
@@ -68,7 +69,7 @@
                                 {{!-- đổ data ở đây --}}
                                 <div class="table-row">
 
-                                    <div class="serial">{{@index}}</div>
+                                    <div class="serial">{{this.index}}</div>
                                     <div class="percentage"><input form="changekey{{id}}" type="hidden" name="id"
                                             value={{value}}>{{value}}</div>
                                     <input form="renewkey{{id}}" type="hidden" name="idPackage" value={{id_package}}>
@@ -101,17 +102,19 @@
                                             <button style="justify-content: center"
                                                 class="genric-btn primary-border circle" type="submit">{{status}}</button>
                                         </form>
-
                                     </div>
                                 </div>
                                 {{/each}}
                             </div>
-                            {{#each pages}}
-                            <a class="getRevenueByYearBtn genric-btn success-border"
-                                href="page={{this.id}}">{{this.id}}</a>
-                            {{/each}}
+                            
                         </div>
+                       {{#each pages}}
+
+                            <a class="getRevenueByYearBtn genric-btn success-border  {{#if this.currentPage}}currentPage{{/if}} "
+                              {{#if this.currentPage}}{{else}}href="?page={{this.id}}"{{/if}}>{{this.id}}</a>
+                    {{/each}}
                     </div>
+                    
                 </div>
             </div>
         </div>
