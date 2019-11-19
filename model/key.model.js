@@ -61,6 +61,6 @@ module.exports = {
     return db.load(`select SUM(price) as total from api_key where date_start like '${year}-${month}%' order by id ASC`)
   },
   getAllKeyByYearPackage: (year, month) => {
-    return db.load(`select SUM(price) as total, name_package from api_key where date_start like '${year}-${month}%' GROUP BY name_package`)
+    return db.load(`select SUM(price) as total, name_package from api_key where date_start like '${year}-${month}%' and name_package <> 'Free' GROUP BY name_package`)
   }
 };
