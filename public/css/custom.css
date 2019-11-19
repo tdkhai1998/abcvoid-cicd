@@ -257,3 +257,11 @@ h2[class="userInfo"] {
   margin-right: 2px;
   width: 100px;
 }
+
+.progress-table {
+  counter-reset: tableCount;
+}
+.counterCell:before {
+  content: counter(tableCount);
+  counter-increment: tableCount;
+}
