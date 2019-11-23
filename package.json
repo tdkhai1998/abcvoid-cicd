@@ -7,7 +7,7 @@
     "dev": "nodemon  ./bin/www"
   },
   "lint-staged": {
-    "routes/*.js": [
+    "./routes/*.js": [
       "eslint --fix",
       "git add"
     ]
