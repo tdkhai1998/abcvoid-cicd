@@ -6,15 +6,9 @@
     "start": "node ./bin/www",
     "dev": "nodemon  ./bin/www"
   },
-  "lint-staged": {
-    "./routes/*.js": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "eslint ./routes --ext .js,.jsx",
       "pre-push": "git-branch-is -r \"^((?!master).)*$\""
     }
   },
